@@ -1,0 +1,119 @@
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark" style="background-color: #04374C;">
+    <div class="container">
+        <a class="navbar-brand" href="#">Sandhi genome project</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div style="width: 100%;height: 100vh;background-color:rgba(255, 253, 253, 0.877);">
+    <div class="row" >
+        <div class="col-sm-4 d-none d-lg-block" style="width: 100%; height: 100vh;padding: 0%;position: fixed;">
+            <div class="card text-white">
+                <img class="card-img" src="../../assets/dn.jpg" style="width: 100%;height:100vh ;">
+                <div class="card-img-overlay">
+                    <h2 class="card-title">Genome Project</h2>
+                    <h4 class="card-text">Sandhi Genome Project</h4>
+                    <p class="card-text">
+                        <small class="text-white">Standardize your analysis pipeline using customizable protocols.
+
+                            Browse and identify key genetic variants in an easy-to-use, powerful user interface with flexible and interactive filters and annotations.</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-sm-12" style="padding: 0%;position: absolute;right:0">
+            <div class="card border-primary" style="margin-top: 6%;margin-left: 6%;margin-right: 6%;">
+                <div class="card-body">
+                    <h4 class="card-title"><strong>Patient Clinical Information</strong></h4>
+                    <table style="width:100%" cellspacing="0"><tr>
+                        <td><mat-form-field style="width:100%">
+                          <mat-label>Sample ID</mat-label>
+                          <input matInput type="text" required>
+                        </mat-form-field></td>
+                      </tr>
+                    </table>
+                    <table class="example-full-width" cellspacing="0"><tr>
+                        <td><mat-form-field class="example-full-width">
+                          <mat-label>Enter age</mat-label>
+                          <input matInput type="number" required>
+                        </mat-form-field></td>
+                        <td><mat-form-field>
+                            <mat-label>Sex</mat-label>
+                            <select matNativeControl required>
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                              <option value="other">Other</option>
+                            </select>
+                            </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+                    <table style="width:100%" cellspacing="0"><tr>
+                        <td><mat-form-field style="width:100%">
+                          <mat-label>Clinical Features</mat-label>
+                          <input matInput type="text" required>
+                        </mat-form-field></td>
+                      </tr>
+                    </table>
+                    <table class="example-full-width" cellspacing="0"><tr>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Consanguinity</mat-label>
+                                <select matNativeControl required>
+                                  <option value="yes">Yes</option>
+                                  <option value="no">No</option>
+                                </select>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field>
+                                <mat-label>Other family members affected ?</mat-label>
+                                <select matNativeControl required>
+                                  <option value="yes">Yes</option>
+                                  <option value="no">No</option>
+                                </select>
+                            </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+                    <table style="width:100%" cellspacing="0"><tr>
+                        <td><mat-form-field style="width:100%">
+                          <mat-label>Details of affected family members</mat-label>
+                          <input matInput type="text" required>
+                        </mat-form-field></td>
+                      </tr>
+                    </table>
+                    <div style="text-align: center;">
+                    <button class="btn btn-success" style="width: 20rem;" >Submit</button>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="file"><strong>Upload genetic Variants File</strong></label>
+                        <br>
+                        <input type="file"
+                               id="file"
+                               (change)="handleFileInput($event.target.files)">
+                    </div> -->
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+  
+
