@@ -1,0 +1,88 @@
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><strong><i class="fas fa-filter"></i>  Select Filters</strong></h3>
+          <button class="close"  (click)="onClose()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+              <div class="col-4" style="text-align: center;">
+                <div class="form-group">
+                  <label for="sel1"><strong>Description</strong></label>
+                  <select class="form-control" id="sel1" >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-4" style="text-align: center;">
+                 <div class="form-group">
+                  <label for="sel1"><strong>Property</strong></label>
+                  <select class="form-control" id="sel1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-4" style="text-align: center;">
+                <div class="form-group">
+                  <label for="sel1"><strong>Condition</strong></label>
+                  <select class="form-control" id="sel1" >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="col-4 mt-4" style="text-align: center;">
+                <div class="form-group">
+                  <label for="sel1"><strong>Value</strong></label>
+                  <select class="form-control" id="sel1" >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-4 mt-4" style="text-align: center;">
+                <div class="form-group">
+                  <label for="sel1"><strong>Value Type</strong></label>
+                  <select class="form-control" id="sel1" >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-4 mt-4" style="text-align: center;">
+                <div class="form-group">
+                  <label for="sel1"><strong>Value Class</strong></label>
+                  <select class="form-control" id="sel1" >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="text-align: center;">
+          <button class="btn btn-success" (click)="onClose()">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div >
+    <h1 class="display-3 text-center my-4">Variants</h1>
+    <app-table></app-table>
+</div>
