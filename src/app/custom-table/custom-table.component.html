@@ -1,0 +1,1061 @@
+<div style="margin-left:40px;">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Global Search</span>
+    </div>
+    <input
+      class="form-control"
+      style="max-width: 250px;"
+      type="text"
+      placeholder="Search"
+      [(ngModel)]="searchtext"
+    />
+  </div>
+</div>
+<div>
+  <ngx-spinner></ngx-spinner>
+  <div style="text-align: right;margin-top: -5%;margin-right: 5%;">
+    <button
+      class="btn btn-outline-info"
+      data-toggle="modal"
+      data-target="#myModal"
+    >
+      <i class="far fa-plus-square"></i>
+    </button>
+  </div>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Add Column</h2>
+          <button class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="allele_main"
+                [checked]="Allele_Details"
+                (change)="AlleleFieldChange($event)"
+              />
+              <label class="form-check-label" for="allele_main">
+                <a>Allele Details </a>
+              </label>
+              <i
+                (click)="showalleleSubClass()"
+                class="fas fa-arrow-down ml-2"
+                *ngIf="!allele_sub_class"
+              ></i>
+              <i
+                (click)="showalleleSubClass()"
+                class="fas fa-arrow-up ml-2"
+                *ngIf="allele_sub_class"
+              ></i>
+              <!-- <i class="far fa-plus-square ml-2"></i> -->
+            </div>
+            <div *ngIf="Allele_Details">
+              <div *ngIf="allele_sub_class" style="margin-left: 50px;">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="alt_sub"
+                    [checked]="Alt"
+                    (change)="AltFieldChange($event)"
+                  />
+                  <label class="form-check-label" for="alt_sub">
+                    <a>Alt</a>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="ref_sub"
+                    [checked]="Ref"
+                    (change)="RefFieldChange($event)"
+                  />
+                  <label class="form-check-label" for="ref_sub">
+                    <a>Ref</a>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="chromosome_main"
+                [checked]="Chromosome_Details"
+                (change)="ChromosomeFieldChange($event)"
+              />
+              <label class="form-check-label" for="chromosome_main">
+                <a>Chromosome Details </a>
+              </label>
+              <i
+                (click)="showchromosomeSubClass()"
+                class="fas fa-arrow-down ml-2"
+                *ngIf="!chromosome_sub_class"
+              ></i>
+              <i
+                (click)="showchromosomeSubClass()"
+                class="fas fa-arrow-up ml-2"
+                *ngIf="chromosome_sub_class"
+              ></i>
+              <!-- <i class="far fa-plus-square ml-2"></i> -->
+            </div>
+            <div *ngIf="Chromosome_Details">
+              <div *ngIf="chromosome_sub_class" style="margin-left: 50px;">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="chr_sub"
+                    [checked]="Chr"
+                    (change)="ChrFieldChange($event)"
+                  />
+                  <label class="form-check-label" for="chr_sub">
+                    <a>Chr</a>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="end_sub"
+                    [checked]="End"
+                    (change)="EndFieldChange($event)"
+                  />
+                  <label class="form-check-label" for="End_sub">
+                    <a>End</a>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="start_sub"
+                    [checked]="Start"
+                    (change)="StartFieldChange($event)"
+                  />
+                  <label class="form-check-label" for="ref_1_sub">
+                    <a>Start</a>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="chromosome_orig_main"
+                [checked]="Chromosome_Details_Orig"
+                (change)="Chromosome_origFieldChange($event)"
+              />
+              <label class="form-check-label" for="chromosome_orig_main">
+                <a>Chromosome Details(Orig) </a>
+              </label>
+              <i
+                (click)="showchromosome_origSubClass()"
+                class="fas fa-arrow-down ml-2"
+                *ngIf="!chromosome_orig_sub_class"
+              ></i>
+              <i
+                (click)="showchromosome_origSubClass()"
+                class="fas fa-arrow-up ml-2"
+                *ngIf="chromosome_orig_sub_class"
+              ></i>
+              <!-- <i class="far fa-plus-square ml-2"></i> -->
+            </div>
+            <div *ngIf="Chromosome_Details_Orig">
+              <div *ngIf="chromosome_orig_sub_class" style="margin-left: 50px;">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="alt_1_sub"
+                    [checked]="Alt_1"
+                    (change)="Alt_1FieldChange($event)"
+                  />
+                  <label class="form-check-label" for="alt_1_sub">
+                    <a>Alt_1</a>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="chrom_sub"
+                    [checked]="Chrom"
+                    (change)="ChromFieldChange($event)"
+                  />
+                  <label class="form-check-label" for="chrom_sub">
+                    <a>Chrom</a>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="ref_1_sub"
+                    [checked]="Ref_1"
+                    (change)="Ref_1FieldChange($event)"
+                  />
+                  <label class="form-check-label" for="ref_1_sub">
+                    <a>Ref_1</a>
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="start_1_sub"
+                    [checked]="Start_1"
+                    (change)="Start_1FieldChange($event)"
+                  />
+                  <label class="form-check-label" for="start_1_sub">
+                    <a>Start_1</a>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="clinvar_main"
+                [checked]="Clinvar_Details"
+                (change)="ClinvarFieldChange($event)"
+              />
+              <label class="form-check-label" for="clinvar_main">
+                <a>Clinvar Details </a>
+              </label>
+              <i
+                (click)="showclinvarSubClass()"
+                class="fas fa-arrow-down ml-2"
+                *ngIf="!clinvar_sub_class"
+              ></i>
+              <i
+                (click)="showclinvarSubClass()"
+                class="fas fa-arrow-up ml-2"
+                *ngIf="clinvar_sub_class"
+              ></i>
+              <!-- <i class="far fa-plus-square ml-2"></i> -->
+            </div>
+            <div>
+              <div *ngIf="Clinvar_Details">
+                <div *ngIf="clinvar_sub_class" style="margin-left: 50px;">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="clnalleleid_1_sub"
+                      [checked]="CLNALLELEID"
+                      (change)="ClnalleleidFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="alt_1_sub">
+                      <a>CLNALLELEID</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="clndisdb_sub"
+                      [checked]="CLNDISDB"
+                      (change)="ClndisdbFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="clndisdb_sub">
+                      <a>CLNDISDB</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="clndn_sub"
+                      [checked]="CLNDN"
+                      (change)="ClndnFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="clndn_sub">
+                      <a>CLNDN</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="clnrevstat_sub"
+                      [checked]="CLNREVSTAT"
+                      (change)="ClnrevstatFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="clnrevstat_sub">
+                      <a>CLNREVSTAT</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="clnsig_sub"
+                      [checked]="CLNSIG"
+                      (change)="ClnsigFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="clnsig_sub">
+                      <a>CLNSIG</a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scrolling-wrapper" style="margin-top: 20px;margin-right: 20px;">
+    <table class="table table-striped table-bordered" style="margin-left:40px;">
+      <thead>
+        <tr>
+          <th [attr.colspan]="Allele_Details_Count" *ngIf="Allele_Details">
+            Allele Details
+          </th>
+          <th
+            [attr.colspan]="Chromosome_Details_Count"
+            *ngIf="Chromosome_Details"
+          >
+            Chromosome Details
+          </th>
+          <th
+            [attr.colspan]="Chromosome_Details_Orig_Count"
+            *ngIf="Chromosome_Details_Orig"
+          >
+            Chromosome Details (Orig)
+          </th>
+          <th [attr.colspan]="Clinvar_Details_Count" *ngIf="Clinvar_Details">
+            Clinvar Details
+          </th>
+          <th colspan="16" *ngIf="Frequency_of_Variants">
+            Frequency of Variants
+          </th>
+          <th
+            [attr.colspan]="Gene_Variant_Details_Count"
+            *ngIf="Gene_Variant_Details"
+          >
+            Gene Variant Details
+          </th>
+          <th [attr.colspan]="Intervar_Details_Count" *ngIf="Intervar_Details">
+            Intervar Details
+          </th>
+          <th [attr.colspan]="Omim_Details_Count" *ngIf="Omim_Details">
+            OMIM Details
+          </th>
+          <th [attr.colspan]="Other_Info_Count" *ngIf="Other_Info">
+            Other Info
+          </th>
+          <th
+            [attr.colspan]="Prediction_Softwares_Count"
+            *ngIf="Prediction_Softwares"
+          >
+            Prediction Softwares
+          </th>
+          <th [attr.colspan]="Protein_Domain_Count" *ngIf="Protein_Domain">
+            Protein Domain
+          </th>
+          <th
+            [attr.colspan]="Reference_Databases_Count"
+            *ngIf="Reference_Databases"
+          >
+            Reference Databases
+          </th>
+        </tr>
+
+        <tr>
+          <th *ngIf="Alt" class="text-muted">Alt</th>
+          <th *ngIf="Ref" class="text-muted">Ref</th>
+          <th *ngIf="Chr" class="text-muted">Chr<a>...</a></th>
+          <th *ngIf="Start" class="text-muted">Start</th>
+          <th *ngIf="End" class="text-muted">End</th>
+          <th *ngIf="Alt_1" class="text-muted">Alt_1</th>
+          <th *ngIf="Chrom" class="text-muted">Chrom</th>
+          <th *ngIf="Ref_1" class="text-muted">Ref_1</th>
+          <th *ngIf="Start_1" class="text-muted">Start_1</th>
+          <th *ngIf="CLNALLELEID" class="text-muted">CLNALLELEID</th>
+          <th *ngIf="CLNDISDB" class="text-muted">CLNDISDB</th>
+          <th *ngIf="CLNDN" class="text-muted">CLNDN</th>
+          <th *ngIf="CLNREVSTAT" class="text-muted">CLNREVSTAT</th>
+          <th *ngIf="CLNSIG" class="text-muted">CLNSIG</th>
+          <th *ngIf="_1000g2015aug_all" class="text-muted">
+            a1000g2015aug_all
+          </th>
+          <th *ngIf="ExAC_ALL" class="text-muted">ExAC_ALL</th>
+          <th *ngIf="GIV_CDFD_AAF" class="text-muted">GIV_CDFD_AAF</th>
+          <th *ngIf="GIV_CDFD_HET" class="text-muted">GIV_CDFD_HET</th>
+          <th *ngIf="GIV_CDFD_HOM_VAR" class="text-muted">GIV_CDFD_HOM_VAR</th>
+          <th *ngIf="GIV_Indian_AAF" class="text-muted">GIV_Indian_AAF</th>
+          <th *ngIf="GIV_Indian_HET" class="text-muted">GIV_Indian_HET</th>
+          <th *ngIf="GIV_Indian_HOM_VAR" class="text-muted">
+            GIV_Indian_HOM_VAR
+          </th>
+          <th *ngIf="cg69" class="text-muted">cg69</th>
+          <th *ngIf="esp6500siv2_all" class="text-muted">esp6500siv2_all</th>
+          <th *ngIf="gnomAD_exome_ALL" class="text-muted">gnomAD_exome_ALL</th>
+          <th *ngIf="gnomAD_genome_ALL" class="text-muted">
+            gnomAD_genome_ALL
+          </th>
+          <th *ngIf="AAChangerefGene" class="text-muted">AAChange_refGene</th>
+          <th *ngIf="ExonicFuncrefGene" class="text-muted">
+            ExonicFunc_refGene
+          </th>
+          <th *ngIf="Func_refgene" class="text-muted">Func_refGene</th>
+          <th *ngIf="Gene_refgene" class="text-muted">Gene_refGene</th>
+          <th *ngIf="GeneDetailrefGene" class="text-muted">
+            GeneDetail_refGene
+          </th>
+          <th *ngIf="Total_DP" class="text-muted">Total_DP</th>
+          <th *ngIf="Zygosity" class="text-muted">Zygosity</th>
+          <th *ngIf="genomicSuperDups" class="text-muted">genomicSuperDups</th>
+          <th *ngIf="phastConsElements46way" class="text-muted">
+            phastConsElements46way
+          </th>
+          <th *ngIf="BA1" class="text-muted">BA1</th>
+          <th *ngIf="BP1" class="text-muted">BP1</th>
+          <th *ngIf="BP2" class="text-muted">BP2</th>
+          <th *ngIf="BP3" class="text-muted">BP3</th>
+          <th *ngIf="BP4" class="text-muted">BP4</th>
+          <th *ngIf="BP5" class="text-muted">BP5</th>
+          <th *ngIf="BP6" class="text-muted">BP6</th>
+          <th *ngIf="BP7" class="text-muted">BP7</th>
+          <th *ngIf="BS1" class="text-muted">BS1</th>
+          <th *ngIf="BS2" class="text-muted">BS2</th>
+          <th *ngIf="BS3" class="text-muted">BS3</th>
+          <th *ngIf="BS4" class="text-muted">BS4</th>
+          <th *ngIf="InterVar_automated" class="text-muted">
+            InterVar_automated
+          </th>
+          <th *ngIf="PM1" class="text-muted">PM1</th>
+          <th *ngIf="PM2" class="text-muted">PM2</th>
+          <th *ngIf="PM3" class="text-muted">PM3</th>
+          <th *ngIf="PM4" class="text-muted">PM4</th>
+          <th *ngIf="PM5" class="text-muted">PM5</th>
+          <th *ngIf="PM6" class="text-muted">PM6</th>
+          <th *ngIf="PP1" class="text-muted">PP1</th>
+          <th *ngIf="PP2" class="text-muted">PP2</th>
+          <th *ngIf="PP3" class="text-muted">PP3</th>
+          <th *ngIf="PP4" class="text-muted">PP4</th>
+          <th *ngIf="PP5" class="text-muted">PP5</th>
+          <th *ngIf="PS1" class="text-muted">PS1</th>
+          <th *ngIf="PS2" class="text-muted">PS2</th>
+          <th *ngIf="PS3" class="text-muted">PS3</th>
+          <th *ngIf="PS4" class="text-muted">PS4</th>
+          <th *ngIf="PVS1" class="text-muted">PVS1</th>
+          <th *ngIf="omimgene" class="text-muted">OMIM_gene</th>
+          <th *ngIf="OMIMgenename" class="text-muted">OMIM_genename</th>
+          <th *ngIf="OMIMphenotype" class="text-muted">OMIM_phenotype</th>
+          <th *ngIf="Filter" class="text-muted">Filter</th>
+          <th
+            *ngIf="GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB"
+            class="text-muted"
+          >
+            GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB
+          </th>
+          <th *ngIf="Otherinfo" class="text-muted">Otherinfo</th>
+          <th *ngIf="Qual_score" class="text-muted">Qual_score</th>
+          <th *ngIf="CADD" class="text-muted">CADD</th>
+          <th *ngIf="CADD13_PHRED" class="text-muted">CADD13_PHRED</th>
+          <th *ngIf="CADD13_RawScore" class="text-muted">CADD13_RawScore</th>
+          <th *ngIf="CADD_Phred" class="text-muted">CADD_Phred</th>
+          <th *ngIf="MCAP13" class="text-muted">MCAP13</th>
+          <th *ngIf="MutationTaster_pred" class="text-muted">
+            MutationTaster_pred
+          </th>
+          <th *ngIf="MutationTaster_score" class="text-muted">
+            MutationTaster_score
+          </th>
+          <th *ngIf="Polyphen2_HDIV_pred" class="text-muted">
+            Polyphen2_HDIV_pred
+          </th>
+          <th *ngIf="Polyphen2_HDIV_score" class="text-muted">
+            Polyphen2_HDIV_score
+          </th>
+          <th *ngIf="Polyphen2_HVAR_pred" class="text-muted">
+            Polyphen2_HVAR_pred
+          </th>
+          <th *ngIf="Polyphen2_HVAR_score" class="text-muted">
+            Polyphen2_HVAR_score
+          </th>
+          <th *ngIf="SIFT_pred" class="text-muted">SIFT_pred</th>
+          <th *ngIf="SIFT_score" class="text-muted">SIFT_score</th>
+          <th *ngIf="Interpro_domain" class="text-muted">Interpro_domain</th>
+          <th *ngIf="avsnp138" class="text-muted">avsnp138</th>
+          <th *ngIf="snp138NonFlagged" class="text-muted">snp138NonFlagged</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let pos of value_list
+              | filter: searchtext
+              | paginate: { itemsPerPage: 100, currentPage: p };
+            let i = index
+          "
+        >
+          <td
+            *ngIf="Alt"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Alt }}
+          </td>
+          <td
+            *ngIf="Ref"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Ref }}
+          </td>
+          <td
+            *ngIf="Chr"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Chr }}
+          </td>
+          <td
+            *ngIf="Start"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Start }}
+          </td>
+          <td
+            *ngIf="End"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.End }}
+          </td>
+          <td
+            *ngIf="Alt_1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Alt_1 }}
+          </td>
+          <td
+            *ngIf="Chrom"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Chrom }}
+          </td>
+          <td
+            *ngIf="Ref_1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Ref_1 }}
+          </td>
+          <td
+            *ngIf="Start_1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Start_1 }}
+          </td>
+          <td
+            *ngIf="CLNALLELEID"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.CLNALLELEID }}
+          </td>
+          <td
+            *ngIf="CLNDISDB"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.CLNDISDB }}
+          </td>
+          <td
+            *ngIf="CLNDN"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.CLNDN }}
+          </td>
+          <td
+            *ngIf="CLNREVSTAT"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.CLNREVSTAT }}
+          </td>
+          <td
+            *ngIf="CLNSIG"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.CLNSIG }}
+          </td>
+          <td
+            *ngIf="_1000g2015aug_all"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.a1000g2015aug_all }}
+          </td>
+          <td
+            *ngIf="ExAC_ALL"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.ExAC_ALL }}
+          </td>
+          <td
+            *ngIf="GIV_CDFD_AAF"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.GIV_CDFD_AAF }}
+          </td>
+          <td
+            *ngIf="GIV_CDFD_HET"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.GIV_CDFD_HET }}
+          </td>
+          <td
+            *ngIf="GIV_CDFD_HOM_VAR"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.GIV_CDFD_HOM_VAR }}
+          </td>
+          <td
+            *ngIf="GIV_Indian_AAF"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.GIV_Indian_AAF }}
+          </td>
+          <td
+            *ngIf="GIV_Indian_HET"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.GIV_Indian_HET }}
+          </td>
+          <td
+            *ngIf="GIV_Indian_HOM_VAR"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.GIV_Indian_HOM_VAR }}
+          </td>
+          <td
+            *ngIf="cg69"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.cg69 }}
+          </td>
+          <td
+            *ngIf="esp6500siv2_all"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.esp6500siv2_all }}
+          </td>
+          <td
+            *ngIf="gnomAD_exome_ALL"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.gnomAD_exome_ALL }}
+          </td>
+          <td
+            *ngIf="gnomAD_genome_ALL"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.gnomAD_genome_ALL }}
+          </td>
+          <td
+            *ngIf="AAChangerefGene"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+            [title]="pos.AAChange_refGene"
+          >
+            {{ pos.AAChange_refGene }}
+          </td>
+          <td
+            *ngIf="ExonicFuncrefGene"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.ExonicFunc_refGene }}
+          </td>
+          <td
+            *ngIf="Func_refgene"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Func_refGene }}
+          </td>
+          <td
+            *ngIf="Gene_refgene"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Gene_refGene }}
+          </td>
+          <td
+            *ngIf="GeneDetailrefGene"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.GeneDetail_refGene }}
+          </td>
+          <td
+            *ngIf="Total_DP"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Total_DP }}
+          </td>
+          <td
+            *ngIf="Zygosity"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Zygosity }}
+          </td>
+          <td
+            *ngIf="genomicSuperDups"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.genomicSuperDups }}
+          </td>
+          <td
+            *ngIf="phastConsElements46way"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.phastConsElements46way }}
+          </td>
+          <td
+            *ngIf="BA1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BA1 }}
+          </td>
+          <td
+            *ngIf="BP1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BP1 }}
+          </td>
+          <td
+            *ngIf="BP2"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BP2 }}
+          </td>
+          <td
+            *ngIf="BP3"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BP3 }}
+          </td>
+          <td
+            *ngIf="BP4"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BP4 }}
+          </td>
+          <td
+            *ngIf="BP5"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BP5 }}
+          </td>
+          <td
+            *ngIf="BP6"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BP6 }}
+          </td>
+          <td
+            *ngIf="BP7"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BP7 }}
+          </td>
+          <td
+            *ngIf="BS1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BS1 }}
+          </td>
+          <td
+            *ngIf="BS2"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BS2 }}
+          </td>
+          <td
+            *ngIf="BS3"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BS3 }}
+          </td>
+          <td
+            *ngIf="BS4"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.BS4 }}
+          </td>
+          <td
+            *ngIf="InterVar_automated"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.InterVar_automated }}
+          </td>
+          <td
+            *ngIf="PM1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PM1 }}
+          </td>
+          <td
+            *ngIf="PM2"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PM2 }}
+          </td>
+          <td
+            *ngIf="PM3"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PM3 }}
+          </td>
+          <td
+            *ngIf="PM4"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PM4 }}
+          </td>
+          <td
+            *ngIf="PM5"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PM5 }}
+          </td>
+          <td
+            *ngIf="PM6"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PM6 }}
+          </td>
+          <td
+            *ngIf="PP1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PP1 }}
+          </td>
+          <td
+            *ngIf="PP2"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PP2 }}
+          </td>
+          <td
+            *ngIf="PP3"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PP3 }}
+          </td>
+          <td
+            *ngIf="PP4"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PP4 }}
+          </td>
+          <td
+            *ngIf="PP5"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PP5 }}
+          </td>
+          <td
+            *ngIf="PS1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PS1 }}
+          </td>
+          <td
+            *ngIf="PS2"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PS2 }}
+          </td>
+          <td
+            *ngIf="PS3"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PS3 }}
+          </td>
+          <td
+            *ngIf="PS4"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PS4 }}
+          </td>
+          <td
+            *ngIf="PVS1"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.PVS1 }}
+          </td>
+          <td
+            *ngIf="omimgene"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.OMIM_gene }}
+          </td>
+          <td
+            *ngIf="OMIMgenename"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.OMIM_genename }}
+          </td>
+          <td
+            *ngIf="OMIMphenotype"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.OMIM_phenotype }}
+          </td>
+          <td
+            *ngIf="Filter"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Filter }}
+          </td>
+          <td
+            *ngIf="GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB }}
+          </td>
+          <td
+            *ngIf="Otherinfo"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Otderinfo }}
+          </td>
+          <td
+            *ngIf="Qual_score"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Qual_score }}
+          </td>
+          <td
+            *ngIf="CADD"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.CADD }}
+          </td>
+          <td
+            *ngIf="CADD13_PHRED"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.CADD13_PHRED }}
+          </td>
+          <td
+            *ngIf="CADD13_RawScore"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.CADD13_RawScore }}
+          </td>
+          <td
+            *ngIf="CADD_Phred"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.CADD_Phred }}
+          </td>
+          <td
+            *ngIf="MCAP13"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.MCAP13 }}
+          </td>
+          <td
+            *ngIf="MutationTaster_pred"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.MutationTaster_pred }}
+          </td>
+          <td
+            *ngIf="MutationTaster_score"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.MutationTaster_score }}
+          </td>
+          <td
+            *ngIf="Polyphen2_HDIV_pred"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Polyphen2_HDIV_pred }}
+          </td>
+          <td
+            *ngIf="Polyphen2_HDIV_score"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Polyphen2_HDIV_score }}
+          </td>
+          <td
+            *ngIf="Polyphen2_HVAR_pred"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Polyphen2_HVAR_pred }}
+          </td>
+          <td
+            *ngIf="Polyphen2_HVAR_score"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Polyphen2_HVAR_score }}
+          </td>
+          <td
+            *ngIf="SIFT_pred"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.SIFT_pred }}
+          </td>
+          <td
+            *ngIf="SIFT_score"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.SIFT_score }}
+          </td>
+          <td
+            *ngIf="Interpro_domain"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.Interpro_domain }}
+          </td>
+          <td
+            *ngIf="avsnp138"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.avsnp138 }}
+          </td>
+          <td
+            *ngIf="snp138NonFlagged"
+            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+          >
+            {{ pos.snp138NonFlagged }}
+          </td>
+          <!-- <td>{{}}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

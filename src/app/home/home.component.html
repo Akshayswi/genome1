@@ -1,112 +1,389 @@
-
 <div style="width: 100vw;height: 100vh;">
-    <div class="row" >
-        <div class="col-sm-4 d-none d-lg-block" style="width: 100%; height: 100vh;padding: 0%;">
-            <div class="card text-white " style="border-right: #e08e14 2px solid;">
-                <img class="card-img" style="width: 100%;height:100vh ;">
-                <div class="card-img-overlay">
-                    <h2 class="card-title text-dark"><strong>Genome Project</strong></h2>
-                    <hr>
-                    <div class="card text-dark shadow-lg p-3 mb-5 bg-white rounded" style="padding: 2px;">
-                    <h2 class="card-text text-dark display-4">Sandhi Genome Varient Analysis</h2>
-                    <p class="card-text lead">
-                        <small class="text-dark">Standardize your analysis pipeline using customizable protocols.
-
-                            Browse and identify key genetic variants in an easy-to-use, powerful user interface with flexible and interactive filters and annotations.</small>
-                    </p>
-                    </div>
-                </div>
-            </div>
+  <div class="row">
+    <div
+      class="col-sm-4 d-none d-lg-block"
+      style="width: 100%; height: 100vh;padding: 0%;"
+    >
+      <div class="card text-white " style="border-right: #008272 2px solid;">
+        <img class="card-img" style="width: 100%;height:100vh ;" />
+        <div class="card-img-overlay">
+          <h2 class="card-title text-dark"><strong>Genome Project</strong></h2>
+          <hr />
+          <div
+            class="card text-dark shadow-lg p-3 mb-5 bg-white rounded"
+            style="padding: 2px;"
+          >
+            <h2 class="card-text text-dark display-4">
+              Sandhi Genome Varient Analysis
+            </h2>
+            <p class="card-text lead">
+              <small class="text-dark"
+                >Standardize your analysis pipeline using customizable
+                protocols. Browse and identify key genetic variants in an
+                easy-to-use, powerful user interface with flexible and
+                interactive filters and annotations.</small
+              >
+            </p>
+          </div>
         </div>
-        <div class="col-lg-8 col-sm-12" style="padding: 0%;position: absolute;right:0;">
-            <div class="card border-muted shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 6%;margin-left: 6%;margin-right: 6%; background-color:#F4F4F4">
-                <div class="card-body">
-                    <form [formGroup]="detailFormGroup" (ngSubmit)="onSubmit()">
-                    <div>
-                        <h4 class="card-title"><strong>Patient Clinical Information</strong></h4>
-                    <table style="width:100%" cellspacing="0"><tr >
-                        <td><mat-form-field style="width:100%;">
+      </div>
+    </div>
+    <div
+      class="col-lg-8 col-sm-12"
+      style="padding: 0%;position: absolute;right:0;"
+    >
+      <div style="text-align: center;margin-top: 30px;">
+        <h2 class="card-title text-dark">
+          <strong>Patient Clinical Information</strong>
+        </h2>
+      </div>
+      <div
+        class="btn-group"
+        style="width: 40%;margin-left: 6%;background-color:#fff"
+      >
+        <button
+          class="btn btn-outline-info"
+          type="button"
+          [ngClass]="{ selected: view }"
+          [disabled]="view"
+          (click)="onView()"
+        >
+          View
+        </button>
+
+        <button
+          class="btn btn-outline-info"
+          type="button"
+          [disabled]="!view"
+          (click)="onCreate()"
+          [ngClass]="{ selected: !view }"
+        >
+          Create
+        </button>
+      </div>
+      <div
+        class="card border-muted shadow-lg  mb-5 bg-white rounded"
+        style="margin-left: 6%;margin-right: 6%; background-color:#F4F4F4; border-top: antiquewhite;"
+      >
+        <div class="card-body">
+          <form [formGroup]="detailFormGroup" (ngSubmit)="onSubmit()">
+            <div *ngIf="view">
+              <ngx-select-dropdown
+                (change)="selectionChanged($event)"
+                formControlName="sampleId"
+                [multiple]="false"
+                [config]="config"
+                [options]="dropdownOptions"
+              ></ngx-select-dropdown>
+              <table style="width:100%" cellspacing="0">
+                <tr>
+                  <!-- <td><mat-form-field style="width:100%;">
                           <mat-label>Sample ID</mat-label>
                           <input matInput type="text" required formControlName="sampleId">
-                        </mat-form-field></td>
-                      </tr>
-                    </table>
-                    <table class="example-full-width" cellspacing="0"><tr>
-                        <td><mat-form-field style="width: 40%;">
-                          <mat-label>Enter age</mat-label>
-                          <input matInput type="number" required formControlName="age">
-                        </mat-form-field></td>
-                        <td><mat-form-field style="width: 40%;">
-                            <mat-label>Sex</mat-label>
-                            <select matNativeControl required formControlName="sex">
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
-                              <option value="other">Other</option>
-                            </select>
-                            </mat-form-field>
-                        </td>
-                      </tr>
-                    </table>
-                    <table style="width:100%" cellspacing="0"><tr>
-                        <td><mat-form-field style="width:100%">
-                          <mat-label>Clinical Features</mat-label>
-                          <input matInput type="text" required formControlName="clinicalFeatures">
-                        </mat-form-field></td>
-                      </tr>
-                    </table>
-                    <table class="example-full-width" cellspacing="0"><tr>
-                        <td>
-                            <mat-form-field style="width: 50%;">
-                                <mat-label>Consanguinity</mat-label>
-                                <select matNativeControl required formControlName="consanguinity">
-                                  <option value="yes">Yes</option>
-                                  <option value="no">No</option>
-                                </select>
-                            </mat-form-field>
-                        </td>
-                        <td>
-                            <mat-form-field style="width: 80%;"> 
-                                <mat-label>Other family members affected ?</mat-label>
-                                <select matNativeControl required formControlName="familyAffected">
-                                  <option value="yes">Yes</option>
-                                  <option value="no">No</option>
-                                </select>
-                            </mat-form-field>
-                        </td>
-                      </tr>
-                    </table>
-                    <table style="width:100%" cellspacing="0"><tr>
-                        <td><mat-form-field style="width:100%">
-                          <mat-label>Details of affected family members</mat-label>
-                          <input matInput type="text" required formControlName="detailsofFamily">
-                        </mat-form-field></td>
-                      </tr>
-                    </table>
-                    <table class="example-full-width" cellspacing="0"><tr>
-                      <td>
-                          <mat-form-field style="width: 50%;">
-                              <mat-label>Dataset type</mat-label>
-                              <select matNativeControl required formControlName="datasetType">
-                                <option value="yes">CSV</option>
-                              </select>
-                          </mat-form-field>
-                      </td>
-                      <td>
-                        <mat-form-field style="width:100%">
-                          <mat-label>Detaset path</mat-label>
-                          <input matInput type="text" required formControlName="datasetPath">
-                        </mat-form-field>
-                      </td>
-                    </tr>
-                  </table>
-                    <div style="text-align: center;">
-                    <button class="btn btn-success" style="width: 15rem;" type="submit">Submit</button>
-                    <!-- [disabled]="!detailFormGroup.valid" -->
-                    </div>
-                </div>
-                </form>
-                </div>
+                        </mat-form-field></td> -->
+                </tr>
+              </table>
+
+              <table class="example-full-width" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width: 40%;">
+                      <mat-label
+                        >age: <strong>{{ age }}</strong></mat-label
+                      >
+                      <input
+                        matInput
+                        type="number"
+                        formControlName="age"
+                        readonly
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field style="width: 40%;">
+                      <mat-label
+                        >Sex: <strong>{{ sex }}</strong></mat-label
+                      >
+                      <input
+                        matInput
+                        type="text"
+                        formControlName="sex"
+                        readonly
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table style="width:100%" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width:100%">
+                      <mat-label
+                        >Clinical Features:
+                        <strong>{{ clinical_features }}</strong></mat-label
+                      >
+                      <input
+                        matInput
+                        type="text"
+                        readonly
+                        formControlName="clinicalFeatures"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table style="width:100%;" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width: 80%;">
+                      <mat-label
+                        >Consanguinity:
+                        <strong>{{ consanguinity }}</strong></mat-label
+                      >
+                      <input
+                        matInput
+                        type="text"
+                        readonly
+                        formControlName="consanguinity"
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field style="width: 100%;">
+                      <mat-label
+                        >Other family members affected ?
+                        <strong>{{ family_affected }}</strong></mat-label
+                      >
+                      <input
+                        matInput
+                        type="text"
+                        readonly
+                        formControlName="familyAffected"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table style="width:100%" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width:100%">
+                      <mat-label
+                        >Details of affected family members
+                        <strong>{{ family_details }}</strong></mat-label
+                      >
+                      <input
+                        matInput
+                        type="text"
+                        readonly
+                        formControlName="detailsofFamily"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table style="width: 100%;" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width: 80%;">
+                      <mat-label
+                        >Dataset type:
+                        <strong>{{ dataset_type }}</strong></mat-label
+                      >
+                      <input
+                        matInput
+                        type="text"
+                        readonly
+                        formControlName="datasetType"
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field style="width:100%">
+                      <mat-label
+                        >Detaset: <strong>{{ dataset_path }}</strong></mat-label
+                      >
+                      <input
+                        matInput
+                        type="text"
+                        readonly
+                        formControlName="datasetPath"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <div style="text-align: center;">
+                <button
+                  class="btn btn-outline-info"
+                  style="width: 15rem;"
+                  type="submit"
+                >
+                  View Varients
+                </button>
+                <!-- [disabled]="!detailFormGroup.valid" -->
+              </div>
             </div>
-        </div>    
+            <div *ngIf="!view">
+              <!-- <ngx-select-dropdown
+                (change)="selectionChanged($event)"
+                formControlName="sampleId"
+                [multiple]="false"
+                [config]="config"
+                [options]="dropdownOptions"
+              ></ngx-select-dropdown> -->
+              <table style="width:100%" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width:100%;">
+                      <mat-label>Sample ID</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        required
+                        formControlName="sampleId"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table class="example-full-width" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width: 40%;">
+                      <mat-label>Enter age</mat-label>
+                      <input
+                        matInput
+                        type="number"
+                        formControlName="age"
+                        required
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field style="width: 40%;">
+                      <mat-label>Sex</mat-label>
+                      <select matNativeControl required formControlName="sex">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table style="width:100%" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width:100%">
+                      <mat-label>Clinical Features</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        readonly
+                        formControlName="clinicalFeatures"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table class="example-full-width" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width: 50%;">
+                      <mat-label>Consanguinity</mat-label>
+                      <select
+                        matNativeControl
+                        re
+                        formControlName="consanguinity"
+                      >
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field style="width: 80%;">
+                      <mat-label>Other family members affected ?</mat-label>
+                      <select
+                        matNativeControl
+                        required
+                        formControlName="familyAffected"
+                      >
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table style="width:100%" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width:100%">
+                      <mat-label>Details of affected family members</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        required
+                        formControlName="detailsofFamily"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <table class="example-full-width" cellspacing="0">
+                <tr>
+                  <td>
+                    <mat-form-field style="width: 50%;">
+                      <mat-label>Dataset type</mat-label>
+                      <select
+                        matNativeControl
+                        required
+                        formControlName="datasetType"
+                      >
+                        <option value="yes">CSV</option>
+                      </select>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field style="width:100%">
+                      <mat-label>Detaset path</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        required
+                        formControlName="datasetPath"
+                      />
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </table>
+
+              <div style="text-align: center;">
+                <button
+                  class="btn btn-success"
+                  style="width: 15rem;"
+                  type="submit"
+                >
+                  Submit
+                </button>
+                <!-- [disabled]="!detailFormGroup.valid" -->
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
