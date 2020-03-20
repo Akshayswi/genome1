@@ -3,6 +3,10 @@
   style="background-color: #008272"
 >
   <div class="container">
+    <img
+      src="../assets/semantic_logopng.png"
+      style="width:2rem;height: 2rem;"
+    />
     <a class="navbar-brand" href="#">Sandhi GVA</a>
     <button
       class="navbar-toggler"
@@ -33,12 +37,14 @@
     </div>
   </div>
 </nav>
-<router-outlet></router-outlet>
-<footer class="page-footer font-small footer_class">
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3 text-white">
-    © 2020 Copyright:
-    <a href="http://www.semanticwebindia.com/"> semanticwebindia.com</a>
-  </div>
-  <!-- Copyright -->
-</footer>
+<div style="min-height: 100vh;">
+  <router-outlet></router-outlet>
+  <footer class="page-footer font-small footer_class">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3 text-white">
+      © 2020 Copyright:
+      <a href="http://www.semanticwebindia.com/"> semanticwebindia.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+</div>

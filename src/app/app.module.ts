@@ -10,7 +10,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { ReactiveFormsModule } from "@angular/forms";
 import { VariantsComponent } from "./variants/variants.component";
-import { TableComponent } from "./table/table.component";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
@@ -20,12 +19,12 @@ import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { FormsModule } from "@angular/forms";
 import { NgxPaginationModule } from "ngx-pagination";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     VariantsComponent,
-    TableComponent,
     CustomTableComponent
   ],
   imports: [
@@ -44,7 +43,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     Ng2SearchPipeModule,
     FormsModule,
     NgxPaginationModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatAutocompleteModule
   ],
   exports: [],
   providers: [],

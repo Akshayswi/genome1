@@ -1,1061 +1,1480 @@
-<div style="margin-left:40px;">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Global Search</span>
-    </div>
-    <input
-      class="form-control"
-      style="max-width: 250px;"
-      type="text"
-      placeholder="Search"
-      [(ngModel)]="searchtext"
-    />
-  </div>
-</div>
 <div>
-  <ngx-spinner></ngx-spinner>
-  <div style="text-align: right;margin-top: -5%;margin-right: 5%;">
-    <button
-      class="btn btn-outline-info"
-      data-toggle="modal"
-      data-target="#myModal"
-    >
-      <i class="far fa-plus-square"></i>
-    </button>
-  </div>
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title">Add Column</h2>
-          <button class="close" data-dismiss="modal">&times;</button>
+  <div>
+    <hr />
+    <div class="row">
+      <div class="col-3 text-center">
+        <h1 class="display-3"><strong>Variants</strong></h1>
+      </div>
+      <div class="col-6"></div>
+      <div class="col-3">
+        <div
+          class="card border-muted shadow-lg bg-white rounded"
+          style="width: 200px;text-align: center;"
+        >
+          <h3 style="margin-top: auto;margin-bottom: auto;">
+            Number of rows:<strong>{{ value_list.length }}</strong>
+          </h3>
         </div>
-        <div class="modal-body">
-          <div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="allele_main"
-                [checked]="Allele_Details"
-                (change)="AlleleFieldChange($event)"
-              />
-              <label class="form-check-label" for="allele_main">
-                <a>Allele Details </a>
-              </label>
-              <i
-                (click)="showalleleSubClass()"
-                class="fas fa-arrow-down ml-2"
-                *ngIf="!allele_sub_class"
-              ></i>
-              <i
-                (click)="showalleleSubClass()"
-                class="fas fa-arrow-up ml-2"
-                *ngIf="allele_sub_class"
-              ></i>
-              <!-- <i class="far fa-plus-square ml-2"></i> -->
-            </div>
-            <div *ngIf="Allele_Details">
-              <div *ngIf="allele_sub_class" style="margin-left: 50px;">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="alt_sub"
-                    [checked]="Alt"
-                    (change)="AltFieldChange($event)"
-                  />
-                  <label class="form-check-label" for="alt_sub">
-                    <a>Alt</a>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="ref_sub"
-                    [checked]="Ref"
-                    (change)="RefFieldChange($event)"
-                  />
-                  <label class="form-check-label" for="ref_sub">
-                    <a>Ref</a>
-                  </label>
-                </div>
-              </div>
-            </div>
+      </div>
+      <hr />
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Global Search</span>
           </div>
-          <div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="chromosome_main"
-                [checked]="Chromosome_Details"
-                (change)="ChromosomeFieldChange($event)"
-              />
-              <label class="form-check-label" for="chromosome_main">
-                <a>Chromosome Details </a>
-              </label>
-              <i
-                (click)="showchromosomeSubClass()"
-                class="fas fa-arrow-down ml-2"
-                *ngIf="!chromosome_sub_class"
-              ></i>
-              <i
-                (click)="showchromosomeSubClass()"
-                class="fas fa-arrow-up ml-2"
-                *ngIf="chromosome_sub_class"
-              ></i>
-              <!-- <i class="far fa-plus-square ml-2"></i> -->
-            </div>
-            <div *ngIf="Chromosome_Details">
-              <div *ngIf="chromosome_sub_class" style="margin-left: 50px;">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="chr_sub"
-                    [checked]="Chr"
-                    (change)="ChrFieldChange($event)"
-                  />
-                  <label class="form-check-label" for="chr_sub">
-                    <a>Chr</a>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="end_sub"
-                    [checked]="End"
-                    (change)="EndFieldChange($event)"
-                  />
-                  <label class="form-check-label" for="End_sub">
-                    <a>End</a>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="start_sub"
-                    [checked]="Start"
-                    (change)="StartFieldChange($event)"
-                  />
-                  <label class="form-check-label" for="ref_1_sub">
-                    <a>Start</a>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="chromosome_orig_main"
-                [checked]="Chromosome_Details_Orig"
-                (change)="Chromosome_origFieldChange($event)"
-              />
-              <label class="form-check-label" for="chromosome_orig_main">
-                <a>Chromosome Details(Orig) </a>
-              </label>
-              <i
-                (click)="showchromosome_origSubClass()"
-                class="fas fa-arrow-down ml-2"
-                *ngIf="!chromosome_orig_sub_class"
-              ></i>
-              <i
-                (click)="showchromosome_origSubClass()"
-                class="fas fa-arrow-up ml-2"
-                *ngIf="chromosome_orig_sub_class"
-              ></i>
-              <!-- <i class="far fa-plus-square ml-2"></i> -->
-            </div>
-            <div *ngIf="Chromosome_Details_Orig">
-              <div *ngIf="chromosome_orig_sub_class" style="margin-left: 50px;">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="alt_1_sub"
-                    [checked]="Alt_1"
-                    (change)="Alt_1FieldChange($event)"
-                  />
-                  <label class="form-check-label" for="alt_1_sub">
-                    <a>Alt_1</a>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="chrom_sub"
-                    [checked]="Chrom"
-                    (change)="ChromFieldChange($event)"
-                  />
-                  <label class="form-check-label" for="chrom_sub">
-                    <a>Chrom</a>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="ref_1_sub"
-                    [checked]="Ref_1"
-                    (change)="Ref_1FieldChange($event)"
-                  />
-                  <label class="form-check-label" for="ref_1_sub">
-                    <a>Ref_1</a>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="start_1_sub"
-                    [checked]="Start_1"
-                    (change)="Start_1FieldChange($event)"
-                  />
-                  <label class="form-check-label" for="start_1_sub">
-                    <a>Start_1</a>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="clinvar_main"
-                [checked]="Clinvar_Details"
-                (change)="ClinvarFieldChange($event)"
-              />
-              <label class="form-check-label" for="clinvar_main">
-                <a>Clinvar Details </a>
-              </label>
-              <i
-                (click)="showclinvarSubClass()"
-                class="fas fa-arrow-down ml-2"
-                *ngIf="!clinvar_sub_class"
-              ></i>
-              <i
-                (click)="showclinvarSubClass()"
-                class="fas fa-arrow-up ml-2"
-                *ngIf="clinvar_sub_class"
-              ></i>
-              <!-- <i class="far fa-plus-square ml-2"></i> -->
-            </div>
-            <div>
-              <div *ngIf="Clinvar_Details">
-                <div *ngIf="clinvar_sub_class" style="margin-left: 50px;">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="clnalleleid_1_sub"
-                      [checked]="CLNALLELEID"
-                      (change)="ClnalleleidFieldChange($event)"
-                    />
-                    <label class="form-check-label" for="alt_1_sub">
-                      <a>CLNALLELEID</a>
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="clndisdb_sub"
-                      [checked]="CLNDISDB"
-                      (change)="ClndisdbFieldChange($event)"
-                    />
-                    <label class="form-check-label" for="clndisdb_sub">
-                      <a>CLNDISDB</a>
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="clndn_sub"
-                      [checked]="CLNDN"
-                      (change)="ClndnFieldChange($event)"
-                    />
-                    <label class="form-check-label" for="clndn_sub">
-                      <a>CLNDN</a>
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="clnrevstat_sub"
-                      [checked]="CLNREVSTAT"
-                      (change)="ClnrevstatFieldChange($event)"
-                    />
-                    <label class="form-check-label" for="clnrevstat_sub">
-                      <a>CLNREVSTAT</a>
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="clnsig_sub"
-                      [checked]="CLNSIG"
-                      (change)="ClnsigFieldChange($event)"
-                    />
-                    <label class="form-check-label" for="clnsig_sub">
-                      <a>CLNSIG</a>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <input
+            class="form-control"
+            style="max-width: 250px;"
+            type="text"
+            placeholder="Search"
+            [(ngModel)]="searchtext"
+          />
         </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      <div class="col-8">
+        <ngx-spinner></ngx-spinner>
+        <div style="text-align: end;margin-right: 5%;">
+          <button
+            class="btn btn-outline-dark"
+            data-toggle="modal"
+            data-target="#myModal"
+          >
+            Add column
+          </button>
+          <button class="btn btn-outline-dark" (click)="defaultFilter()">
+            Apply Default filter
+          </button>
+
+          <button
+            class="btn btn-outline-dark"
+            data-toggle="modal"
+            data-target="#myModal1"
+          >
+            <i class="fa fa-plus-square"></i>Add Filter
+          </button>
         </div>
       </div>
     </div>
-  </div>
-  <div class="scrolling-wrapper" style="margin-top: 20px;margin-right: 20px;">
-    <table class="table table-striped table-bordered" style="margin-left:40px;">
-      <thead>
-        <tr>
-          <th [attr.colspan]="Allele_Details_Count" *ngIf="Allele_Details">
-            Allele Details
-          </th>
-          <th
-            [attr.colspan]="Chromosome_Details_Count"
-            *ngIf="Chromosome_Details"
-          >
-            Chromosome Details
-          </th>
-          <th
-            [attr.colspan]="Chromosome_Details_Orig_Count"
-            *ngIf="Chromosome_Details_Orig"
-          >
-            Chromosome Details (Orig)
-          </th>
-          <th [attr.colspan]="Clinvar_Details_Count" *ngIf="Clinvar_Details">
-            Clinvar Details
-          </th>
-          <th colspan="16" *ngIf="Frequency_of_Variants">
-            Frequency of Variants
-          </th>
-          <th
-            [attr.colspan]="Gene_Variant_Details_Count"
-            *ngIf="Gene_Variant_Details"
-          >
-            Gene Variant Details
-          </th>
-          <th [attr.colspan]="Intervar_Details_Count" *ngIf="Intervar_Details">
-            Intervar Details
-          </th>
-          <th [attr.colspan]="Omim_Details_Count" *ngIf="Omim_Details">
-            OMIM Details
-          </th>
-          <th [attr.colspan]="Other_Info_Count" *ngIf="Other_Info">
-            Other Info
-          </th>
-          <th
-            [attr.colspan]="Prediction_Softwares_Count"
-            *ngIf="Prediction_Softwares"
-          >
-            Prediction Softwares
-          </th>
-          <th [attr.colspan]="Protein_Domain_Count" *ngIf="Protein_Domain">
-            Protein Domain
-          </th>
-          <th
-            [attr.colspan]="Reference_Databases_Count"
-            *ngIf="Reference_Databases"
-          >
-            Reference Databases
-          </th>
-        </tr>
 
-        <tr>
-          <th *ngIf="Alt" class="text-muted">Alt</th>
-          <th *ngIf="Ref" class="text-muted">Ref</th>
-          <th *ngIf="Chr" class="text-muted">Chr<a>...</a></th>
-          <th *ngIf="Start" class="text-muted">Start</th>
-          <th *ngIf="End" class="text-muted">End</th>
-          <th *ngIf="Alt_1" class="text-muted">Alt_1</th>
-          <th *ngIf="Chrom" class="text-muted">Chrom</th>
-          <th *ngIf="Ref_1" class="text-muted">Ref_1</th>
-          <th *ngIf="Start_1" class="text-muted">Start_1</th>
-          <th *ngIf="CLNALLELEID" class="text-muted">CLNALLELEID</th>
-          <th *ngIf="CLNDISDB" class="text-muted">CLNDISDB</th>
-          <th *ngIf="CLNDN" class="text-muted">CLNDN</th>
-          <th *ngIf="CLNREVSTAT" class="text-muted">CLNREVSTAT</th>
-          <th *ngIf="CLNSIG" class="text-muted">CLNSIG</th>
-          <th *ngIf="_1000g2015aug_all" class="text-muted">
-            a1000g2015aug_all
-          </th>
-          <th *ngIf="ExAC_ALL" class="text-muted">ExAC_ALL</th>
-          <th *ngIf="GIV_CDFD_AAF" class="text-muted">GIV_CDFD_AAF</th>
-          <th *ngIf="GIV_CDFD_HET" class="text-muted">GIV_CDFD_HET</th>
-          <th *ngIf="GIV_CDFD_HOM_VAR" class="text-muted">GIV_CDFD_HOM_VAR</th>
-          <th *ngIf="GIV_Indian_AAF" class="text-muted">GIV_Indian_AAF</th>
-          <th *ngIf="GIV_Indian_HET" class="text-muted">GIV_Indian_HET</th>
-          <th *ngIf="GIV_Indian_HOM_VAR" class="text-muted">
-            GIV_Indian_HOM_VAR
-          </th>
-          <th *ngIf="cg69" class="text-muted">cg69</th>
-          <th *ngIf="esp6500siv2_all" class="text-muted">esp6500siv2_all</th>
-          <th *ngIf="gnomAD_exome_ALL" class="text-muted">gnomAD_exome_ALL</th>
-          <th *ngIf="gnomAD_genome_ALL" class="text-muted">
-            gnomAD_genome_ALL
-          </th>
-          <th *ngIf="AAChangerefGene" class="text-muted">AAChange_refGene</th>
-          <th *ngIf="ExonicFuncrefGene" class="text-muted">
-            ExonicFunc_refGene
-          </th>
-          <th *ngIf="Func_refgene" class="text-muted">Func_refGene</th>
-          <th *ngIf="Gene_refgene" class="text-muted">Gene_refGene</th>
-          <th *ngIf="GeneDetailrefGene" class="text-muted">
-            GeneDetail_refGene
-          </th>
-          <th *ngIf="Total_DP" class="text-muted">Total_DP</th>
-          <th *ngIf="Zygosity" class="text-muted">Zygosity</th>
-          <th *ngIf="genomicSuperDups" class="text-muted">genomicSuperDups</th>
-          <th *ngIf="phastConsElements46way" class="text-muted">
-            phastConsElements46way
-          </th>
-          <th *ngIf="BA1" class="text-muted">BA1</th>
-          <th *ngIf="BP1" class="text-muted">BP1</th>
-          <th *ngIf="BP2" class="text-muted">BP2</th>
-          <th *ngIf="BP3" class="text-muted">BP3</th>
-          <th *ngIf="BP4" class="text-muted">BP4</th>
-          <th *ngIf="BP5" class="text-muted">BP5</th>
-          <th *ngIf="BP6" class="text-muted">BP6</th>
-          <th *ngIf="BP7" class="text-muted">BP7</th>
-          <th *ngIf="BS1" class="text-muted">BS1</th>
-          <th *ngIf="BS2" class="text-muted">BS2</th>
-          <th *ngIf="BS3" class="text-muted">BS3</th>
-          <th *ngIf="BS4" class="text-muted">BS4</th>
-          <th *ngIf="InterVar_automated" class="text-muted">
-            InterVar_automated
-          </th>
-          <th *ngIf="PM1" class="text-muted">PM1</th>
-          <th *ngIf="PM2" class="text-muted">PM2</th>
-          <th *ngIf="PM3" class="text-muted">PM3</th>
-          <th *ngIf="PM4" class="text-muted">PM4</th>
-          <th *ngIf="PM5" class="text-muted">PM5</th>
-          <th *ngIf="PM6" class="text-muted">PM6</th>
-          <th *ngIf="PP1" class="text-muted">PP1</th>
-          <th *ngIf="PP2" class="text-muted">PP2</th>
-          <th *ngIf="PP3" class="text-muted">PP3</th>
-          <th *ngIf="PP4" class="text-muted">PP4</th>
-          <th *ngIf="PP5" class="text-muted">PP5</th>
-          <th *ngIf="PS1" class="text-muted">PS1</th>
-          <th *ngIf="PS2" class="text-muted">PS2</th>
-          <th *ngIf="PS3" class="text-muted">PS3</th>
-          <th *ngIf="PS4" class="text-muted">PS4</th>
-          <th *ngIf="PVS1" class="text-muted">PVS1</th>
-          <th *ngIf="omimgene" class="text-muted">OMIM_gene</th>
-          <th *ngIf="OMIMgenename" class="text-muted">OMIM_genename</th>
-          <th *ngIf="OMIMphenotype" class="text-muted">OMIM_phenotype</th>
-          <th *ngIf="Filter" class="text-muted">Filter</th>
-          <th
-            *ngIf="GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB"
-            class="text-muted"
-          >
-            GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB
-          </th>
-          <th *ngIf="Otherinfo" class="text-muted">Otherinfo</th>
-          <th *ngIf="Qual_score" class="text-muted">Qual_score</th>
-          <th *ngIf="CADD" class="text-muted">CADD</th>
-          <th *ngIf="CADD13_PHRED" class="text-muted">CADD13_PHRED</th>
-          <th *ngIf="CADD13_RawScore" class="text-muted">CADD13_RawScore</th>
-          <th *ngIf="CADD_Phred" class="text-muted">CADD_Phred</th>
-          <th *ngIf="MCAP13" class="text-muted">MCAP13</th>
-          <th *ngIf="MutationTaster_pred" class="text-muted">
-            MutationTaster_pred
-          </th>
-          <th *ngIf="MutationTaster_score" class="text-muted">
-            MutationTaster_score
-          </th>
-          <th *ngIf="Polyphen2_HDIV_pred" class="text-muted">
-            Polyphen2_HDIV_pred
-          </th>
-          <th *ngIf="Polyphen2_HDIV_score" class="text-muted">
-            Polyphen2_HDIV_score
-          </th>
-          <th *ngIf="Polyphen2_HVAR_pred" class="text-muted">
-            Polyphen2_HVAR_pred
-          </th>
-          <th *ngIf="Polyphen2_HVAR_score" class="text-muted">
-            Polyphen2_HVAR_score
-          </th>
-          <th *ngIf="SIFT_pred" class="text-muted">SIFT_pred</th>
-          <th *ngIf="SIFT_score" class="text-muted">SIFT_score</th>
-          <th *ngIf="Interpro_domain" class="text-muted">Interpro_domain</th>
-          <th *ngIf="avsnp138" class="text-muted">avsnp138</th>
-          <th *ngIf="snp138NonFlagged" class="text-muted">snp138NonFlagged</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="
-            let pos of value_list
-              | filter: searchtext
-              | paginate: { itemsPerPage: 100, currentPage: p };
-            let i = index
-          "
-        >
-          <td
-            *ngIf="Alt"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Alt }}
-          </td>
-          <td
-            *ngIf="Ref"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Ref }}
-          </td>
-          <td
-            *ngIf="Chr"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Chr }}
-          </td>
-          <td
-            *ngIf="Start"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Start }}
-          </td>
-          <td
-            *ngIf="End"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.End }}
-          </td>
-          <td
-            *ngIf="Alt_1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Alt_1 }}
-          </td>
-          <td
-            *ngIf="Chrom"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Chrom }}
-          </td>
-          <td
-            *ngIf="Ref_1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Ref_1 }}
-          </td>
-          <td
-            *ngIf="Start_1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Start_1 }}
-          </td>
-          <td
-            *ngIf="CLNALLELEID"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.CLNALLELEID }}
-          </td>
-          <td
-            *ngIf="CLNDISDB"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.CLNDISDB }}
-          </td>
-          <td
-            *ngIf="CLNDN"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.CLNDN }}
-          </td>
-          <td
-            *ngIf="CLNREVSTAT"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.CLNREVSTAT }}
-          </td>
-          <td
-            *ngIf="CLNSIG"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.CLNSIG }}
-          </td>
-          <td
-            *ngIf="_1000g2015aug_all"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.a1000g2015aug_all }}
-          </td>
-          <td
-            *ngIf="ExAC_ALL"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.ExAC_ALL }}
-          </td>
-          <td
-            *ngIf="GIV_CDFD_AAF"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.GIV_CDFD_AAF }}
-          </td>
-          <td
-            *ngIf="GIV_CDFD_HET"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.GIV_CDFD_HET }}
-          </td>
-          <td
-            *ngIf="GIV_CDFD_HOM_VAR"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.GIV_CDFD_HOM_VAR }}
-          </td>
-          <td
-            *ngIf="GIV_Indian_AAF"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.GIV_Indian_AAF }}
-          </td>
-          <td
-            *ngIf="GIV_Indian_HET"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.GIV_Indian_HET }}
-          </td>
-          <td
-            *ngIf="GIV_Indian_HOM_VAR"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.GIV_Indian_HOM_VAR }}
-          </td>
-          <td
-            *ngIf="cg69"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.cg69 }}
-          </td>
-          <td
-            *ngIf="esp6500siv2_all"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.esp6500siv2_all }}
-          </td>
-          <td
-            *ngIf="gnomAD_exome_ALL"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.gnomAD_exome_ALL }}
-          </td>
-          <td
-            *ngIf="gnomAD_genome_ALL"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.gnomAD_genome_ALL }}
-          </td>
-          <td
-            *ngIf="AAChangerefGene"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-            [title]="pos.AAChange_refGene"
-          >
-            {{ pos.AAChange_refGene }}
-          </td>
-          <td
-            *ngIf="ExonicFuncrefGene"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.ExonicFunc_refGene }}
-          </td>
-          <td
-            *ngIf="Func_refgene"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Func_refGene }}
-          </td>
-          <td
-            *ngIf="Gene_refgene"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Gene_refGene }}
-          </td>
-          <td
-            *ngIf="GeneDetailrefGene"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.GeneDetail_refGene }}
-          </td>
-          <td
-            *ngIf="Total_DP"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Total_DP }}
-          </td>
-          <td
-            *ngIf="Zygosity"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Zygosity }}
-          </td>
-          <td
-            *ngIf="genomicSuperDups"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.genomicSuperDups }}
-          </td>
-          <td
-            *ngIf="phastConsElements46way"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.phastConsElements46way }}
-          </td>
-          <td
-            *ngIf="BA1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BA1 }}
-          </td>
-          <td
-            *ngIf="BP1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BP1 }}
-          </td>
-          <td
-            *ngIf="BP2"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BP2 }}
-          </td>
-          <td
-            *ngIf="BP3"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BP3 }}
-          </td>
-          <td
-            *ngIf="BP4"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BP4 }}
-          </td>
-          <td
-            *ngIf="BP5"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BP5 }}
-          </td>
-          <td
-            *ngIf="BP6"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BP6 }}
-          </td>
-          <td
-            *ngIf="BP7"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BP7 }}
-          </td>
-          <td
-            *ngIf="BS1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BS1 }}
-          </td>
-          <td
-            *ngIf="BS2"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BS2 }}
-          </td>
-          <td
-            *ngIf="BS3"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BS3 }}
-          </td>
-          <td
-            *ngIf="BS4"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.BS4 }}
-          </td>
-          <td
-            *ngIf="InterVar_automated"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.InterVar_automated }}
-          </td>
-          <td
-            *ngIf="PM1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PM1 }}
-          </td>
-          <td
-            *ngIf="PM2"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PM2 }}
-          </td>
-          <td
-            *ngIf="PM3"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PM3 }}
-          </td>
-          <td
-            *ngIf="PM4"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PM4 }}
-          </td>
-          <td
-            *ngIf="PM5"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PM5 }}
-          </td>
-          <td
-            *ngIf="PM6"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PM6 }}
-          </td>
-          <td
-            *ngIf="PP1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PP1 }}
-          </td>
-          <td
-            *ngIf="PP2"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PP2 }}
-          </td>
-          <td
-            *ngIf="PP3"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PP3 }}
-          </td>
-          <td
-            *ngIf="PP4"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PP4 }}
-          </td>
-          <td
-            *ngIf="PP5"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PP5 }}
-          </td>
-          <td
-            *ngIf="PS1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PS1 }}
-          </td>
-          <td
-            *ngIf="PS2"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PS2 }}
-          </td>
-          <td
-            *ngIf="PS3"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PS3 }}
-          </td>
-          <td
-            *ngIf="PS4"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PS4 }}
-          </td>
-          <td
-            *ngIf="PVS1"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.PVS1 }}
-          </td>
-          <td
-            *ngIf="omimgene"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.OMIM_gene }}
-          </td>
-          <td
-            *ngIf="OMIMgenename"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.OMIM_genename }}
-          </td>
-          <td
-            *ngIf="OMIMphenotype"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.OMIM_phenotype }}
-          </td>
-          <td
-            *ngIf="Filter"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Filter }}
-          </td>
-          <td
-            *ngIf="GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB }}
-          </td>
-          <td
-            *ngIf="Otherinfo"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Otderinfo }}
-          </td>
-          <td
-            *ngIf="Qual_score"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Qual_score }}
-          </td>
-          <td
-            *ngIf="CADD"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.CADD }}
-          </td>
-          <td
-            *ngIf="CADD13_PHRED"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.CADD13_PHRED }}
-          </td>
-          <td
-            *ngIf="CADD13_RawScore"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.CADD13_RawScore }}
-          </td>
-          <td
-            *ngIf="CADD_Phred"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.CADD_Phred }}
-          </td>
-          <td
-            *ngIf="MCAP13"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.MCAP13 }}
-          </td>
-          <td
-            *ngIf="MutationTaster_pred"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.MutationTaster_pred }}
-          </td>
-          <td
-            *ngIf="MutationTaster_score"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.MutationTaster_score }}
-          </td>
-          <td
-            *ngIf="Polyphen2_HDIV_pred"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Polyphen2_HDIV_pred }}
-          </td>
-          <td
-            *ngIf="Polyphen2_HDIV_score"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Polyphen2_HDIV_score }}
-          </td>
-          <td
-            *ngIf="Polyphen2_HVAR_pred"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Polyphen2_HVAR_pred }}
-          </td>
-          <td
-            *ngIf="Polyphen2_HVAR_score"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Polyphen2_HVAR_score }}
-          </td>
-          <td
-            *ngIf="SIFT_pred"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.SIFT_pred }}
-          </td>
-          <td
-            *ngIf="SIFT_score"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.SIFT_score }}
-          </td>
-          <td
-            *ngIf="Interpro_domain"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.Interpro_domain }}
-          </td>
-          <td
-            *ngIf="avsnp138"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.avsnp138 }}
-          </td>
-          <td
-            *ngIf="snp138NonFlagged"
-            style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
-          >
-            {{ pos.snp138NonFlagged }}
-          </td>
-          <!-- <td>{{}}</td> -->
-        </tr>
-      </tbody>
-    </table>
+    <div class="modal" id="myModal1">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4><strong>Add filter</strong></h4>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <button
+              class="btn btn-outline-info"
+              (click)="editForm()"
+              *ngIf="!addForm"
+            >
+              <i class="fa fa-plus-square"></i>Add filter
+            </button>
+            <form
+              *ngIf="addForm"
+              [formGroup]="addtoDefaultForm"
+              (submit)="addtoDefault()"
+            >
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Enter description</label>
+                    <input
+                      class="form-control form-control-sm"
+                      id="description"
+                      placeholder="Description"
+                      formControlName="description"
+                    />
+                  </div>
+                  <label>Select type</label>
+                  <select
+                    class="form-control form-control-sm"
+                    formControlName="type"
+                    required
+                    (change)="conditionChange($event)"
+                  >
+                    <option>Number</option>
+                    <option>String</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Select column</label>
+                    <ngx-select-dropdown
+                      (change)="selectionChanged($event)"
+                      formControlName="column"
+                      [multiple]="false"
+                      [config]="config"
+                      [options]="dropdownOptions"
+                    ></ngx-select-dropdown>
+                  </div>
+                  <label>Select condition</label>
+                  <select
+                    class="form-control form-control-sm"
+                    formControlName="condition"
+                    placeholder="Select condition"
+                  >
+                    <label>Select Condition</label>
+                    <option *ngFor="let item of condition_list">{{
+                      item
+                    }}</option>
+                    <!-- <option><=</option>
+                  <option>>=</option>
+                  <option>cont</option> -->
+                  </select>
+                  <div class="form-group" style="margin-top: 10px;">
+                    <label>Select Value</label>
+                    <ngx-select-dropdown
+                      (change)="valueChanged($event)"
+                      formControlName="value"
+                      [multiple]="false"
+                      [config]="config1"
+                      [options]="unique_value"
+                    ></ngx-select-dropdown>
+                    <div style="text-align: center;margin-top: 5px;">
+                      <p style="margin-left: auto;margin-right: auto;">Or</p>
+                    </div>
+                    <input
+                      class="form-control form-control-sm"
+                      id="value"
+                      placeholder="Enter value"
+                      formControlName="value"
+                    />
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-success" type="submit" *ngIf="addForm">
+                Add Filter
+              </button>
+            </form>
+            <table class="table table-striped table-bordered" *ngIf="!addForm">
+              <thead>
+                <tr>
+                  <th *ngFor="let item of filter_heading">{{ item }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let i of filters_array">
+                  <td>{{ i.desc }}</td>
+                  <td>{{ i.column }}</td>
+                  <td>{{ i.condition }}</td>
+                  <td>{{ i.valueType }}</td>
+                  <td>
+                    <input
+                      [value]="i.value"
+                      [placeholder]="i.value"
+                      (change)="inputChange($event, i)"
+                    />
+                  </td>
+                  <td>
+                    <div class="checkbox">
+                      <label
+                        ><input
+                          type="checkbox"
+                          value=""
+                          (change)="valueChange(i)"
+                          [checked]="i.checked"
+                      /></label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-success"
+              (click)="addNewFilter()"
+              *ngIf="!addForm"
+              data-dismiss="modal"
+            >
+              Apply Filter
+            </button>
+            <!-- <button (click)="apply()">Apply</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="myModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Add Column</h2>
+            <button class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="allele_main"
+                  [checked]="Allele_Details"
+                  (change)="AlleleFieldChange($event)"
+                />
+                <label class="form-check-label" for="allele_main">
+                  <a>Allele Details </a>
+                </label>
+                <i
+                  (click)="showalleleSubClass()"
+                  class="fas fa-arrow-down ml-2"
+                  *ngIf="!allele_sub_class"
+                ></i>
+                <i
+                  (click)="showalleleSubClass()"
+                  class="fas fa-arrow-up ml-2"
+                  *ngIf="allele_sub_class"
+                ></i>
+                <!-- <i class="far fa-plus-square ml-2"></i> -->
+              </div>
+              <div *ngIf="Allele_Details">
+                <div *ngIf="allele_sub_class" style="margin-left: 50px;">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="alt_sub"
+                      [checked]="Alt"
+                      (change)="AltFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="alt_sub">
+                      <a>Alt</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="ref_sub"
+                      [checked]="Ref"
+                      (change)="RefFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="ref_sub">
+                      <a>Ref</a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="chromosome_main"
+                  [checked]="Chromosome_Details"
+                  (change)="ChromosomeFieldChange($event)"
+                />
+                <label class="form-check-label" for="chromosome_main">
+                  <a>Chromosome Details </a>
+                </label>
+                <i
+                  (click)="showchromosomeSubClass()"
+                  class="fas fa-arrow-down ml-2"
+                  *ngIf="!chromosome_sub_class"
+                ></i>
+                <i
+                  (click)="showchromosomeSubClass()"
+                  class="fas fa-arrow-up ml-2"
+                  *ngIf="chromosome_sub_class"
+                ></i>
+                <!-- <i class="far fa-plus-square ml-2"></i> -->
+              </div>
+              <div *ngIf="Chromosome_Details">
+                <div *ngIf="chromosome_sub_class" style="margin-left: 50px;">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="chr_sub"
+                      [checked]="Chr"
+                      (change)="ChrFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="chr_sub">
+                      <a>Chr</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="end_sub"
+                      [checked]="End"
+                      (change)="EndFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="End_sub">
+                      <a>End</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="start_sub"
+                      [checked]="Start"
+                      (change)="StartFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="ref_1_sub">
+                      <a>Start</a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="chromosome_orig_main"
+                  [checked]="Chromosome_Details_Orig"
+                  (change)="Chromosome_origFieldChange($event)"
+                />
+                <label class="form-check-label" for="chromosome_orig_main">
+                  <a>Chromosome Details(Orig) </a>
+                </label>
+                <i
+                  (click)="showchromosome_origSubClass()"
+                  class="fas fa-arrow-down ml-2"
+                  *ngIf="!chromosome_orig_sub_class"
+                ></i>
+                <i
+                  (click)="showchromosome_origSubClass()"
+                  class="fas fa-arrow-up ml-2"
+                  *ngIf="chromosome_orig_sub_class"
+                ></i>
+                <!-- <i class="far fa-plus-square ml-2"></i> -->
+              </div>
+              <div *ngIf="Chromosome_Details_Orig">
+                <div
+                  *ngIf="chromosome_orig_sub_class"
+                  style="margin-left: 50px;"
+                >
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="alt_1_sub"
+                      [checked]="Alt_1"
+                      (change)="Alt_1FieldChange($event)"
+                    />
+                    <label class="form-check-label" for="alt_1_sub">
+                      <a>Alt_1</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="chrom_sub"
+                      [checked]="Chrom"
+                      (change)="ChromFieldChange($event)"
+                    />
+                    <label class="form-check-label" for="chrom_sub">
+                      <a>Chrom</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="ref_1_sub"
+                      [checked]="Ref_1"
+                      (change)="Ref_1FieldChange($event)"
+                    />
+                    <label class="form-check-label" for="ref_1_sub">
+                      <a>Ref_1</a>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="start_1_sub"
+                      [checked]="Start_1"
+                      (change)="Start_1FieldChange($event)"
+                    />
+                    <label class="form-check-label" for="start_1_sub">
+                      <a>Start_1</a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="clinvar_main"
+                  [checked]="Clinvar_Details"
+                  (change)="ClinvarFieldChange($event)"
+                />
+                <label class="form-check-label" for="clinvar_main">
+                  <a>Clinvar Details </a>
+                </label>
+                <i
+                  (click)="showclinvarSubClass()"
+                  class="fas fa-arrow-down ml-2"
+                  *ngIf="!clinvar_sub_class"
+                ></i>
+                <i
+                  (click)="showclinvarSubClass()"
+                  class="fas fa-arrow-up ml-2"
+                  *ngIf="clinvar_sub_class"
+                ></i>
+                <!-- <i class="far fa-plus-square ml-2"></i> -->
+              </div>
+              <div>
+                <div *ngIf="Clinvar_Details">
+                  <div *ngIf="clinvar_sub_class" style="margin-left: 50px;">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="clnalleleid_1_sub"
+                        [checked]="CLNALLELEID"
+                        (change)="ClnalleleidFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="alt_1_sub">
+                        <a>CLNALLELEID</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="clndisdb_sub"
+                        [checked]="CLNDISDB"
+                        (change)="ClndisdbFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="clndisdb_sub">
+                        <a>CLNDISDB</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="clndn_sub"
+                        [checked]="CLNDN"
+                        (change)="ClndnFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="clndn_sub">
+                        <a>CLNDN</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="clnrevstat_sub"
+                        [checked]="CLNREVSTAT"
+                        (change)="ClnrevstatFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="clnrevstat_sub">
+                        <a>CLNREVSTAT</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="clnsig_sub"
+                        [checked]="CLNSIG"
+                        (change)="ClnsigFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="clnsig_sub">
+                        <a>CLNSIG</a>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="frequency_main"
+                  [checked]="Frequency_of_Variants"
+                  (change)="FrequencyFieldChange($event)"
+                />
+                <label class="form-check-label" for="frequency_main">
+                  <a>Frequency of Variants</a>
+                </label>
+                <i
+                  (click)="showfrequencySubClass()"
+                  class="fas fa-arrow-down ml-2"
+                  *ngIf="!frequency_sub_class"
+                ></i>
+                <i
+                  (click)="showfrequencySubClass()"
+                  class="fas fa-arrow-up ml-2"
+                  *ngIf="frequency_sub_class"
+                ></i>
+                <!-- <i class="far fa-plus-square ml-2"></i> -->
+              </div>
+              <div>
+                <div *ngIf="Frequency_of_Variants">
+                  <div *ngIf="frequency_sub_class" style="margin-left: 50px;">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="_1000g2015aug_all_sub"
+                        [checked]="_1000g2015aug_all"
+                        (change)="_1000g2015aug_allFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="alt_1_sub">
+                        <a>1000g2015aug_all</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="ExAC_ALL_sub"
+                        [checked]="ExAC_ALL"
+                        (change)="ExAC_ALLFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="ExAC_ALL_sub">
+                        <a>ExAC_ALL</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="GIV_CDFD_AAF_sub"
+                        [checked]="GIV_CDFD_AAF"
+                        (change)="GIV_CDFD_AAFFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="GIV_CDFD_AAF_sub">
+                        <a>GIV_CDFD_AAF</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="GIV_CDFD_HET_sub"
+                        [checked]="GIV_CDFD_HET"
+                        (change)="GIV_CDFD_HETFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="GIV_CDFD_HET_sub">
+                        <a>GIV_CDFD_HET</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="GIV_CDFD_HOM_VAR_sub"
+                        [checked]="GIV_CDFD_HOM_VAR"
+                        (change)="GIV_CDFD_HOM_VARFieldChange($event)"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="GIV_CDFD_HOM_VAR_sub"
+                      >
+                        <a>GIV_CDFD_HOM-VAR</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="GIV_Indian_AAF_sub"
+                        [checked]="GIV_Indian_AAF"
+                        (change)="GIV_Indian_AAFFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="GIV_Indian_AAF_sub">
+                        <a>GIV_Indian_AAF</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="GIV_Indian_HET_sub"
+                        [checked]="GIV_Indian_HET"
+                        (change)="GIV_Indian_HETFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="GIV_Indian_HET_sub">
+                        <a>GIV_Indian_HET</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="GIV_Indian_HOM_VAR_sub"
+                        [checked]="GIV_Indian_HOM_VAR"
+                        (change)="GIV_Indian_HOM_VARFieldChange($event)"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="GIV_Indian_HOM_VAR_sub"
+                      >
+                        <a>GIV_Indian_HOM-VAR</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="ICGC_Id_sub"
+                        [checked]="ICGC_Id"
+                        (change)="ICGC_IdFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="ICGC_Id_sub">
+                        <a>ICGC_Id</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="ICGC_Occurrence_sub"
+                        [checked]="ICGC_Occurrence"
+                        (change)="ICGC_OccurrenceFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="ICGC_Occurrence_sub">
+                        <a>ICGC_Occurrence</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="cg69_sub"
+                        [checked]="cg69"
+                        (change)="cg69FieldChange($event)"
+                      />
+                      <label class="form-check-label" for="cg69_sub">
+                        <a>cg69</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="cosmic70_sub"
+                        [checked]="cosmic70"
+                        (change)="cosmic70FieldChange($event)"
+                      />
+                      <label class="form-check-label" for="cosmic70_sub">
+                        <a>cosmic70</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="esp6500siv2_all_sub"
+                        [checked]="esp6500siv2_all"
+                        (change)="esp6500siv2_allFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="esp6500siv2_all_sub">
+                        <a>esp6500siv2_all</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="gnomAD_exome_ALL_sub"
+                        [checked]="gnomAD_exome_ALL"
+                        (change)="gnomAD_exome_ALLFieldChange($event)"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="gnomAD_exome_ALL_sub"
+                      >
+                        <a>gnomAD_exome_ALL</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="gnomAD_genome_ALL_sub"
+                        [checked]="gnomAD_genome_ALL"
+                        (change)="gnomAD_genome_ALLFieldChange($event)"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="gnomAD_genome_ALL_sub"
+                      >
+                        <a>gnomAD_genome_ALL</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="nci60_sub"
+                        [checked]="nci60"
+                        (change)="nci60FieldChange($event)"
+                      />
+                      <label class="form-check-label" for="nci60_sub">
+                        <a>nci60</a>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="gene_main"
+                  [checked]="Gene_Variant_Details"
+                  (change)="GeneVariantFieldChange($event)"
+                />
+                <label class="form-check-label" for="gene_main">
+                  <a>Gene Variant Details</a>
+                </label>
+                <i
+                  (click)="showgenevariantSubClass()"
+                  class="fas fa-arrow-down ml-2"
+                  *ngIf="!gene_variant_sub_class"
+                ></i>
+                <i
+                  (click)="showgenevariantSubClass()"
+                  class="fas fa-arrow-up ml-2"
+                  *ngIf="gene_variant_sub_class"
+                ></i>
+                <!-- <i class="far fa-plus-square ml-2"></i> -->
+              </div>
+              <div>
+                <div *ngIf="Gene_Variant_Details">
+                  <div
+                    *ngIf="gene_variant_sub_class"
+                    style="margin-left: 50px;"
+                  >
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="AAchange_sub"
+                        [checked]="AAChange_refGene"
+                        (change)="AAchangeFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="AAchange_sub">
+                        <a>AAChange.refGene</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="ExonicFunc_sub"
+                        [checked]="ExonicFunc_refGene"
+                        (change)="ExonicFuncFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="ExonicFunc_sub">
+                        <a>ExonicFunc.refGene</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="Func_sub"
+                        [checked]="Func_refGene"
+                        (change)="Func_refFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="Func_sub">
+                        <a>Func.refGene</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="Gene_sub"
+                        [checked]="Gene_refGene"
+                        (change)="Gene_refFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="Gene_sub">
+                        <a>Gene.refGene</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="GeneDetail_sub"
+                        [checked]="GeneDetail_refGene"
+                        (change)="GeneDetailFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="GeneDetail_sub">
+                        <a>GeneDetail.refGene</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="Total_DP_sub"
+                        [checked]="Total_DP"
+                        (change)="Total_DPFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="Total_DP_sub">
+                        <a>Total_DP</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="Zygosity_sub"
+                        [checked]="Zygosity"
+                        (change)="ZygosityFieldChange($event)"
+                      />
+                      <label class="form-check-label" for="Zygosity_sub">
+                        <a>Zygosity</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="genomicSuperDups_sub"
+                        [checked]="genomicSuperDups"
+                        (change)="genomicSuperDupsFieldChange($event)"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="genomicSuperDups_sub"
+                      >
+                        <a>genomicSuperDups</a>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="phastConsElements46way_sub"
+                        [checked]="phastConsElements46way"
+                        (change)="phastConsElements46wayFieldChange($event)"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="phastConsElements46way_sub"
+                      >
+                        <a>phastConsElements46way</a>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scrolling-wrapper">
+      <table
+        class="table table-striped table-bordered shadow-lg"
+        style="margin-left:20px;background-color: #f4f4f4"
+      >
+        <thead>
+          <tr style="text-align: center;">
+            <th colspan="1"></th>
+            <th [attr.colspan]="Allele_Details_Count" *ngIf="Allele_Details">
+              Allele Details
+            </th>
+            <th
+              [attr.colspan]="Chromosome_Details_Count"
+              *ngIf="Chromosome_Details"
+            >
+              Chromosome Details
+            </th>
+            <th
+              [attr.colspan]="Chromosome_Details_Orig_Count"
+              *ngIf="Chromosome_Details_Orig"
+            >
+              Chromosome Details (Orig)
+            </th>
+            <th [attr.colspan]="Clinvar_Details_Count" *ngIf="Clinvar_Details">
+              Clinvar Details
+            </th>
+            <th
+              [attr.colspan]="Frequency_of_Variants_Count"
+              *ngIf="Frequency_of_Variants"
+            >
+              Frequency of Variants
+            </th>
+            <th
+              [attr.colspan]="Gene_Variant_Details_Count"
+              *ngIf="Gene_Variant_Details"
+            >
+              Gene Variant Details
+            </th>
+            <th
+              [attr.colspan]="Intervar_Details_Count"
+              *ngIf="Intervar_Details"
+            >
+              Intervar Details
+            </th>
+            <th [attr.colspan]="Omim_Details_Count" *ngIf="Omim_Details">
+              OMIM Details
+            </th>
+            <th [attr.colspan]="Other_Info_Count" *ngIf="Other_Info">
+              Other Info
+            </th>
+            <th
+              [attr.colspan]="Prediction_Softwares_Count"
+              *ngIf="Prediction_Softwares"
+            >
+              Prediction Softwares
+            </th>
+            <th [attr.colspan]="Protein_Domain_Count" *ngIf="Protein_Domain">
+              Protein Domain
+            </th>
+            <th
+              [attr.colspan]="Reference_Databases_Count"
+              *ngIf="Reference_Databases"
+            >
+              Reference Databases
+            </th>
+          </tr>
+
+          <tr>
+            <th class="text-muted">Select</th>
+            <th *ngIf="Alt" class="text-muted">Alt</th>
+            <th *ngIf="Ref" class="text-muted">Ref</th>
+            <th *ngIf="Chr" class="text-muted">Chr</th>
+            <th *ngIf="Start" class="text-muted">Start</th>
+            <th *ngIf="End" class="text-muted">End</th>
+            <th *ngIf="Alt_1" class="text-muted">Alt_1</th>
+            <th *ngIf="Chrom" class="text-muted">Chrom</th>
+            <th *ngIf="Ref_1" class="text-muted">Ref_1</th>
+            <th *ngIf="Start_1" class="text-muted">Start_1</th>
+            <th *ngIf="CLNALLELEID" class="text-muted">CLNALLELEID</th>
+            <th *ngIf="CLNDISDB" class="text-muted">CLNDISDB</th>
+            <th *ngIf="CLNDN" class="text-muted">CLNDN</th>
+            <th *ngIf="CLNREVSTAT" class="text-muted">CLNREVSTAT</th>
+            <th *ngIf="CLNSIG" class="text-muted">CLNSIG</th>
+            <th *ngIf="_1000g2015aug_all" class="text-muted">
+              1000g2015aug_all
+            </th>
+            <th *ngIf="ExAC_ALL" class="text-muted">ExAC_ALL</th>
+            <th *ngIf="GIV_CDFD_AAF" class="text-muted">GIV_CDFD_AAF</th>
+            <th *ngIf="GIV_CDFD_HET" class="text-muted">GIV_CDFD_HET</th>
+            <th *ngIf="GIV_CDFD_HOM_VAR" class="text-muted">
+              GIV_CDFD_HOM_VAR
+            </th>
+            <th *ngIf="GIV_Indian_AAF" class="text-muted">GIV_Indian_AAF</th>
+            <th *ngIf="GIV_Indian_HET" class="text-muted">GIV_Indian_HET</th>
+            <th *ngIf="GIV_Indian_HOM_VAR" class="text-muted">
+              GIV_Indian_HOM_VAR
+            </th>
+            <th *ngIf="ICGC_Id" class="text-muted">ICGC_Id</th>
+            <th *ngIf="ICGC_Occurrence" class="text-muted">ICGC_Occurrence</th>
+            <th *ngIf="cosmic70" class="text-muted">cosmic70</th>
+            <th *ngIf="cg69" class="text-muted">cg69</th>
+            <th *ngIf="esp6500siv2_all" class="text-muted">esp6500siv2_all</th>
+            <th *ngIf="gnomAD_exome_ALL" class="text-muted">
+              gnomAD_exome_ALL
+            </th>
+            <th *ngIf="gnomAD_genome_ALL" class="text-muted">
+              gnomAD_genome_ALL
+            </th>
+            <th *ngIf="nci60" class="text-muted">nci60</th>
+
+            <th *ngIf="AAChange_refGene" class="text-muted">
+              AAChange.refGene
+            </th>
+            <th *ngIf="ExonicFunc_refGene" class="text-muted">
+              ExonicFunc.refGene
+            </th>
+            <th *ngIf="Func_refGene" class="text-muted">Func.refGene</th>
+            <th *ngIf="Gene_refGene" class="text-muted">Gene.refGene</th>
+            <th *ngIf="GeneDetail_refGene" class="text-muted">
+              GeneDetail.refGene
+            </th>
+            <th *ngIf="Total_DP" class="text-muted">Total_DP</th>
+            <th *ngIf="Zygosity" class="text-muted">Zygosity</th>
+            <th *ngIf="genomicSuperDups" class="text-muted">
+              genomicSuperDups
+            </th>
+            <th *ngIf="phastConsElements46way" class="text-muted">
+              phastConsElements46way
+            </th>
+            <th *ngIf="BA1" class="text-muted">BA1</th>
+            <th *ngIf="BP1" class="text-muted">BP1</th>
+            <th *ngIf="BP2" class="text-muted">BP2</th>
+            <th *ngIf="BP3" class="text-muted">BP3</th>
+            <th *ngIf="BP4" class="text-muted">BP4</th>
+            <th *ngIf="BP5" class="text-muted">BP5</th>
+            <th *ngIf="BP6" class="text-muted">BP6</th>
+            <th *ngIf="BP7" class="text-muted">BP7</th>
+            <th *ngIf="BS1" class="text-muted">BS1</th>
+            <th *ngIf="BS2" class="text-muted">BS2</th>
+            <th *ngIf="BS3" class="text-muted">BS3</th>
+            <th *ngIf="BS4" class="text-muted">BS4</th>
+            <th *ngIf="InterVar_automated" class="text-muted">
+              InterVar_automated
+            </th>
+            <th *ngIf="PM1" class="text-muted">PM1</th>
+            <th *ngIf="PM2" class="text-muted">PM2</th>
+            <th *ngIf="PM3" class="text-muted">PM3</th>
+            <th *ngIf="PM4" class="text-muted">PM4</th>
+            <th *ngIf="PM5" class="text-muted">PM5</th>
+            <th *ngIf="PM6" class="text-muted">PM6</th>
+            <th *ngIf="PP1" class="text-muted">PP1</th>
+            <th *ngIf="PP2" class="text-muted">PP2</th>
+            <th *ngIf="PP3" class="text-muted">PP3</th>
+            <th *ngIf="PP4" class="text-muted">PP4</th>
+            <th *ngIf="PP5" class="text-muted">PP5</th>
+            <th *ngIf="PS1" class="text-muted">PS1</th>
+            <th *ngIf="PS2" class="text-muted">PS2</th>
+            <th *ngIf="PS3" class="text-muted">PS3</th>
+            <th *ngIf="PS4" class="text-muted">PS4</th>
+            <th *ngIf="PVS1" class="text-muted">PVS1</th>
+            <th *ngIf="omimgene" class="text-muted">OMIM_gene</th>
+            <th *ngIf="OMIMgenename" class="text-muted">OMIM_genename</th>
+            <th *ngIf="OMIMphenotype" class="text-muted">OMIM_phenotype</th>
+            <th *ngIf="Filter" class="text-muted">Filter</th>
+            <th
+              *ngIf="GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB"
+              class="text-muted"
+            >
+              GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB
+            </th>
+            <th *ngIf="Otherinfo" class="text-muted">Otherinfo</th>
+            <th *ngIf="Qual_score" class="text-muted">Qual_score</th>
+            <th *ngIf="CADD" class="text-muted">CADD</th>
+            <th *ngIf="CADD13_PHRED" class="text-muted">CADD13_PHRED</th>
+            <th *ngIf="CADD13_RawScore" class="text-muted">CADD13_RawScore</th>
+            <th *ngIf="CADD_Phred" class="text-muted">CADD_Phred</th>
+            <th *ngIf="MCAP13" class="text-muted">MCAP13</th>
+            <th *ngIf="MutationTaster_pred" class="text-muted">
+              MutationTaster_pred
+            </th>
+            <th *ngIf="MutationTaster_score" class="text-muted">
+              MutationTaster_score
+            </th>
+            <th *ngIf="Polyphen2_HDIV_pred" class="text-muted">
+              Polyphen2_HDIV_pred
+            </th>
+            <th *ngIf="Polyphen2_HDIV_score" class="text-muted">
+              Polyphen2_HDIV_score
+            </th>
+            <th *ngIf="Polyphen2_HVAR_pred" class="text-muted">
+              Polyphen2_HVAR_pred
+            </th>
+            <th *ngIf="Polyphen2_HVAR_score" class="text-muted">
+              Polyphen2_HVAR_score
+            </th>
+            <th *ngIf="SIFT_pred" class="text-muted">SIFT_pred</th>
+            <th *ngIf="SIFT_score" class="text-muted">SIFT_score</th>
+            <th *ngIf="Interpro_domain" class="text-muted">Interpro_domain</th>
+            <th *ngIf="avsnp138" class="text-muted">avsnp138</th>
+            <th *ngIf="snp138NonFlagged" class="text-muted">
+              snp138NonFlagged
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let pos of value_list
+                | filter: searchtext
+                | paginate: { itemsPerPage: 100, currentPage: p };
+              let i = index
+            "
+          >
+            <td>
+              <div class="checkbox">
+                <label
+                  ><input
+                    type="checkbox"
+                    value=""
+                    (change)="selectionChange(pos)"
+                    [checked]="pos.checked"
+                /></label>
+              </div>
+            </td>
+            <td *ngIf="Alt">
+              {{ pos.Alt }}
+            </td>
+            <td *ngIf="Ref">
+              {{ pos.Ref }}
+            </td>
+            <td *ngIf="Chr">
+              {{ pos.Chr }}
+            </td>
+            <td *ngIf="Start">
+              {{ pos.Start }}
+            </td>
+            <td *ngIf="End">
+              {{ pos.End }}
+            </td>
+            <td *ngIf="Alt_1">
+              {{ pos.Alt_1 }}
+            </td>
+            <td *ngIf="Chrom">
+              {{ pos.Chrom }}
+            </td>
+            <td *ngIf="Ref_1">
+              {{ pos.Ref_1 }}
+            </td>
+            <td *ngIf="Start_1">
+              {{ pos.Start_1 }}
+            </td>
+            <td *ngIf="CLNALLELEID">
+              {{ pos.CLNALLELEID }}
+            </td>
+            <td *ngIf="CLNDISDB">
+              {{ pos.CLNDISDB }}
+            </td>
+            <td *ngIf="CLNDN">
+              {{ pos.CLNDN }}
+            </td>
+            <td *ngIf="CLNREVSTAT">
+              {{ pos.CLNREVSTAT }}
+            </td>
+            <td *ngIf="CLNSIG">
+              {{ pos.CLNSIG }}
+            </td>
+            <td *ngIf="_1000g2015aug_all">
+              <a *ngIf="pos._1000g2015aug_all != 'NA'">{{
+                pos._1000g2015aug_all | number: ".0-5"
+              }}</a>
+              <a *ngIf="pos._1000g2015aug_all == 'NA'">{{
+                pos._1000g2015aug_all
+              }}</a>
+            </td>
+            <td *ngIf="ExAC_ALL">
+              <a *ngIf="pos.ExAC_ALL != 'NA'">{{
+                pos.ExAC_ALL | number: ".0-5"
+              }}</a>
+              <a *ngIf="pos.ExAC_ALL == 'NA'">{{ pos.ExAC_ALL }}</a>
+            </td>
+            <td *ngIf="GIV_CDFD_AAF">
+              <a *ngIf="pos.GIV_CDFD_AAF != 'NA'">{{
+                pos.GIV_CDFD_AAF | number: ".0-5"
+              }}</a>
+              <a *ngIf="pos.GIV_CDFD_AAF == 'NA'">{{ pos.GIV_CDFD_AAF }}</a>
+            </td>
+            <td *ngIf="GIV_CDFD_HET">
+              <a *ngIf="pos.GIV_CDFD_HET != 'NA'">{{
+                pos.GIV_CDFD_HET | number: ".0-5"
+              }}</a>
+              <a *ngIf="pos.GIV_CDFD_HET == 'NA'">{{ pos.GIV_CDFD_HET }}</a>
+            </td>
+            <td *ngIf="GIV_CDFD_HOM_VAR">
+              <a *ngIf="pos.GIV_CDFD_HOM_VAR != 'NA'">{{
+                pos.GIV_CDFD_HOM_VAR | number: ".0-5"
+              }}</a>
+              <a *ngIf="pos.GIV_CDFD_HOM_VAR == 'NA'">{{
+                pos.GIV_CDFD_HOM_VAR
+              }}</a>
+            </td>
+            <td *ngIf="GIV_Indian_AAF">
+              <a *ngIf="pos.GIV_Indian_AAF != 'NA'">{{
+                pos.GIV_Indian_AAF | number: ".0-5"
+              }}</a>
+              <a *ngIf="pos.GIV_Indian_AAF == 'NA'">{{ pos.GIV_Indian_AAF }}</a>
+            </td>
+            <td *ngIf="GIV_Indian_HET">
+              {{ pos.GIV_Indian_HET }}
+            </td>
+            <td *ngIf="GIV_Indian_HOM_VAR">
+              {{ pos.GIV_Indian_HOM_VAR }}
+            </td>
+            <td *ngIf="ICGC_Id">
+              {{ pos.ICGC_Id }}
+            </td>
+            <td *ngIf="ICGC_Occurrence">
+              {{ pos.ICGC_Occurrence }}
+            </td>
+            <td *ngIf="cosmic70">
+              {{ pos.cosmic70 }}
+            </td>
+            <td *ngIf="cg69">
+              <a *ngIf="pos.cg69 != 'NA'">{{ pos.cg69 | number: ".0-5" }}</a>
+              <a *ngIf="pos.cg69 == 'NA'">{{ pos.cg69 }}</a>
+            </td>
+            <td *ngIf="esp6500siv2_all">
+              {{ pos.esp6500siv2_all }}
+            </td>
+            <td *ngIf="gnomAD_exome_ALL">
+              <a *ngIf="pos.gnomAD_exome_ALL != 'NA'">{{
+                pos.gnomAD_exome_ALL | number: ".0-5"
+              }}</a>
+              <a *ngIf="pos.gnomAD_exome_ALL == 'NA'">{{
+                pos.gnomAD_exome_ALL
+              }}</a>
+            </td>
+            <td *ngIf="gnomAD_genome_ALL">
+              <a *ngIf="pos.gnomAD_genome_ALL != 'NA'">{{
+                pos.gnomAD_genome_ALL | number: ".0-5"
+              }}</a>
+              <a *ngIf="pos.gnomAD_genome_ALL == 'NA'">{{
+                pos.gnomAD_genome_ALL
+              }}</a>
+            </td>
+            <td *ngIf="nci60">
+              {{ pos.nci60 }}
+            </td>
+            <td
+              *ngIf="AAChange_refGene"
+              [title]="pos.AAChange_refGene"
+              style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+            >
+              {{ pos.AAChange_refGene }}
+            </td>
+            <td *ngIf="ExonicFunc_refGene">
+              {{ pos.ExonicFunc_refGene }}
+            </td>
+            <td *ngIf="Func_refGene">
+              {{ pos.Func_refGene }}
+            </td>
+            <td *ngIf="Gene_refGene">
+              {{ pos.Gene_refGene }}
+            </td>
+            <td *ngIf="GeneDetail_refGene">
+              {{ pos.GeneDetail_refGene }}
+            </td>
+            <td *ngIf="Total_DP">
+              {{ pos.Total_DP }}
+            </td>
+            <td *ngIf="Zygosity">
+              {{ pos.Zygosity }}
+            </td>
+            <td *ngIf="genomicSuperDups">
+              {{ pos.genomicSuperDups }}
+            </td>
+            <td *ngIf="phastConsElements46way">
+              {{ pos.phastConsElements46way }}
+            </td>
+            <td *ngIf="BA1">
+              {{ pos.BA1 }}
+            </td>
+            <td *ngIf="BP1">
+              {{ pos.BP1 }}
+            </td>
+            <td *ngIf="BP2">
+              {{ pos.BP2 }}
+            </td>
+            <td *ngIf="BP3">
+              {{ pos.BP3 }}
+            </td>
+            <td *ngIf="BP4">
+              {{ pos.BP4 }}
+            </td>
+            <td *ngIf="BP5">
+              {{ pos.BP5 }}
+            </td>
+            <td *ngIf="BP6">
+              {{ pos.BP6 }}
+            </td>
+            <td *ngIf="BP7">
+              {{ pos.BP7 }}
+            </td>
+            <td *ngIf="BS1">
+              {{ pos.BS1 }}
+            </td>
+            <td *ngIf="BS2">
+              {{ pos.BS2 }}
+            </td>
+            <td *ngIf="BS3">
+              {{ pos.BS3 }}
+            </td>
+            <td *ngIf="BS4">
+              {{ pos.BS4 }}
+            </td>
+            <td *ngIf="InterVar_automated">
+              {{ pos.InterVar_automated }}
+            </td>
+            <td *ngIf="PM1">
+              {{ pos.PM1 }}
+            </td>
+            <td *ngIf="PM2">
+              {{ pos.PM2 }}
+            </td>
+            <td *ngIf="PM3">
+              {{ pos.PM3 }}
+            </td>
+            <td *ngIf="PM4">
+              {{ pos.PM4 }}
+            </td>
+            <td *ngIf="PM5">
+              {{ pos.PM5 }}
+            </td>
+            <td *ngIf="PM6">
+              {{ pos.PM6 }}
+            </td>
+            <td *ngIf="PP1">
+              {{ pos.PP1 }}
+            </td>
+            <td *ngIf="PP2">
+              {{ pos.PP2 }}
+            </td>
+            <td *ngIf="PP3">
+              {{ pos.PP3 }}
+            </td>
+            <td *ngIf="PP4">
+              {{ pos.PP4 }}
+            </td>
+            <td *ngIf="PP5">
+              {{ pos.PP5 }}
+            </td>
+            <td *ngIf="PS1">
+              {{ pos.PS1 }}
+            </td>
+            <td *ngIf="PS2">
+              {{ pos.PS2 }}
+            </td>
+            <td *ngIf="PS3">
+              {{ pos.PS3 }}
+            </td>
+            <td *ngIf="PS4">
+              {{ pos.PS4 }}
+            </td>
+            <td *ngIf="PVS1">
+              {{ pos.PVS1 }}
+            </td>
+            <td *ngIf="omimgene">
+              {{ pos.OMIM_gene }}
+            </td>
+            <td *ngIf="OMIMgenename">
+              {{ pos.OMIM_genename }}
+            </td>
+            <td *ngIf="OMIMphenotype">
+              {{ pos.OMIM_phenotype }}
+            </td>
+            <td *ngIf="Filter">
+              {{ pos.Filter }}
+            </td>
+            <td *ngIf="GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB">
+              {{ pos.GT_AD_AF_DP_F1R2_F2R1_GQ_PL_GP_PRI_SB_MB }}
+            </td>
+            <td *ngIf="Otherinfo">
+              {{ pos.Otderinfo }}
+            </td>
+            <td *ngIf="Qual_score">
+              {{ pos.Qual_score }}
+            </td>
+            <td *ngIf="CADD">
+              {{ pos.CADD }}
+            </td>
+            <td *ngIf="CADD13_PHRED">
+              {{ pos.CADD13_PHRED }}
+            </td>
+            <td *ngIf="CADD13_RawScore">
+              {{ pos.CADD13_RawScore }}
+            </td>
+            <td *ngIf="CADD_Phred">
+              {{ pos.CADD_Phred }}
+            </td>
+            <td *ngIf="MCAP13">
+              {{ pos.MCAP13 }}
+            </td>
+            <td *ngIf="MutationTaster_pred">
+              {{ pos.MutationTaster_pred }}
+            </td>
+            <td *ngIf="MutationTaster_score">
+              {{ pos.MutationTaster_score }}
+            </td>
+            <td *ngIf="Polyphen2_HDIV_pred">
+              {{ pos.Polyphen2_HDIV_pred }}
+            </td>
+            <td *ngIf="Polyphen2_HDIV_score">
+              {{ pos.Polyphen2_HDIV_score }}
+            </td>
+            <td *ngIf="Polyphen2_HVAR_pred">
+              {{ pos.Polyphen2_HVAR_pred }}
+            </td>
+            <td *ngIf="Polyphen2_HVAR_score">
+              {{ pos.Polyphen2_HVAR_score }}
+            </td>
+            <td *ngIf="SIFT_pred">
+              {{ pos.SIFT_pred }}
+            </td>
+            <td *ngIf="SIFT_score">
+              {{ pos.SIFT_score }}
+            </td>
+            <td *ngIf="Interpro_domain">
+              {{ pos.Interpro_domain }}
+            </td>
+            <td *ngIf="avsnp138">
+              {{ pos.avsnp138 }}
+            </td>
+            <td
+              *ngIf="snp138NonFlagged"
+              style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;"
+            >
+              {{ pos.snp138NonFlagged }}
+            </td>
+            <!-- <td>{{}}</td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <!-- style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;" -->
 </div>
