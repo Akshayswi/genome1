@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"]
+  styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
   fileToUpload: File = null;
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     noResultsFound: "No results found!", // text to be displayed when no items are found while searching
     searchPlaceholder: "Search", // label thats displayed in search input,
     searchOnKey: "name", // key on which search should be performed this will be selective search. if undefined this will be extensive search on all keys
-    clearOnSelection: false // clears search criteria when an option is selected if set to true, default is false
+    clearOnSelection: false, // clears search criteria when an option is selected if set to true, default is false
   };
   detailFormGroup = new FormGroup({
     sampleId: new FormControl(""),
@@ -48,12 +48,12 @@ export class HomeComponent implements OnInit {
     familyAffected: new FormControl(""),
     detailsofFamily: new FormControl(""),
     datasetType: new FormControl(""),
-    datasetPath: new FormControl("")
+    datasetPath: new FormControl(""),
   });
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
-    this.http.get("http://localhost:8000/viewset/sample/").subscribe(data => {
+    this.http.get("http://localhost:8000/viewset/sample/").subscribe((data) => {
       console.log(data);
       var a = JSON.stringify(data);
       var b = JSON.parse(a);
@@ -90,12 +90,12 @@ export class HomeComponent implements OnInit {
     if (this.view == true) {
       this.http
         .post("http://localhost:8000/viewset/selected/", {
-          sample_selected: this.sample_selected
+          sample_selected: this.sample_selected,
         })
-        .subscribe(data => {
+        .subscribe((data) => {
           console.log(data);
         });
-      this.router.navigateByUrl("/variants");
+      this.router.navigateByUrl("/home/variants");
     }
   }
 

@@ -1,18 +1,21 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { HomeComponent } from "./home/home.component";
-import { VariantsComponent } from "./variants/variants.component";
-import { CustomTableComponent } from "./custom-table/custom-table.component";
+import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
-  { path: "home", component: HomeComponent },
-  { path: "variants", component: VariantsComponent },
-  { path: "custom", component: CustomTableComponent }
+  {
+    path: "home",
+    loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
+  },
+  {
+    path: "main",
+    loadChildren: () => import("./main/main.module").then((m) => m.MainModule),
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

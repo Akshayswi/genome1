@@ -1,20 +1,34 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router'
-import { HomeComponent } from './home/home.component';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { FormGroup, FormControl } from "@angular/forms";
 declare var $: any;
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
-export class AppComponent {
-  title = 'gene';
-  constructor(private router:Router){}
-  createCase(){
-    this.router.navigateByUrl('/home')
+export class AppComponent implements OnInit {
+  title = "gene";
+  radioValue;
+  radioGroup = new FormGroup({ radio: new FormControl() });
+  constructor(private router: Router) {}
+  ngOnInit() {
+    console.log(this.radioValue);
   }
-  viewVariants(){
-    this.router.navigateByUrl('/variants')
-    $("#myModal").modal('show');
+  createCase() {
+    this.router.navigateByUrl("/home");
+  }
+  view1Variants() {
+    this.router.navigateByUrl("/variants");
+    // $("#myModal").modal('show');
+  }
+  radioValueChanged() {
+    var value = this.radioGroup.value.radio;
+    console.log(value);
+    if (value == "option1") {
+      this.router.navigate(["/main"]);
+    } else {
+      this.router.navigate(["/home"]);
+    }
   }
 }

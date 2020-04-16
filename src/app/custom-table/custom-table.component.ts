@@ -167,7 +167,7 @@ export class CustomTableComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.http.get("http://localhost:8000/viewset/column/").subscribe(data => {
-      //   console.log(data);
+      console.log(data);
       var a = JSON.stringify(data);
       var b = JSON.parse(a);
       var show_list = b;

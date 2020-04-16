@@ -1,14 +1,12 @@
 .navbar {
-    border-bottom: #149ce0 2px solid;
-    
-  }
-.footer_class{
+  border-bottom: #149ce0 2px solid;
+}
+.footer_class {
   position: relative;
   right: 0;
   bottom: 0;
   left: 0;
   padding: 1rem;
   background-color: #333333;
-  text-align: center; 
-}  
-  
+  text-align: center;
+}

@@ -1,13 +1,9 @@
-<nav
-  class="navbar sticky-top navbar-expand-sm navbar-dark"
-  style="background-color: #008272"
->
+<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
   <div class="container">
-    <img
-      src="../assets/semantic_logopng.png"
-      style="width:2rem;height: 2rem;"
-    />
-    <a class="navbar-brand" href="#">Sandhi GVA</a>
+    <img src="../assets/sandhi_logo.png" style="width: 3rem; height: 2rem;" />
+    <a style="color: coral; margin-top: 5px; margin-left: 10px;" href="#"
+      >Gene Variant Analysis</a
+    >
     <button
       class="navbar-toggler"
       data-toggle="collapse"
@@ -18,33 +14,58 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" (click)="createCase()" style="cursor: pointer;"
-            >Create case</a
+          <a
+            class="nav-link"
+            (click)="createCase()"
+            style="cursor: pointer; color: #149ce0;"
+            >About</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="viewVariants()" style="cursor: pointer;"
-            >View variants
+          <a
+            class="nav-link"
+            (click)="view1Variants()"
+            style="cursor: pointer; color: #149ce0;"
+            >User manual
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="#" style="cursor: pointer; color: #149ce0;"
+            >Contact</a
+          >
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<div style="min-height: 100vh;">
+<div style="min-height: 100vh; margin-top: 10px;">
+  <div style="text-align: center;">
+    <form [formGroup]="radioGroup">
+      <mat-radio-group
+        aria-label="Select an option"
+        formControlName="radio"
+        (change)="radioValueChanged()"
+        color="primary"
+      >
+        <mat-radio-button name="option1" value="option1"
+          >Search a case</mat-radio-button
+        >
+        <mat-radio-button
+          name="option2"
+          value="option2"
+          style="margin-left: 10px;"
+          >Gene Variant Analysis</mat-radio-button
+        >
+      </mat-radio-group>
+    </form>
+  </div>
   <router-outlet></router-outlet>
-  <footer class="page-footer font-small footer_class">
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3 text-white">
-      © 2020 Copyright:
-      <a href="http://www.semanticwebindia.com/"> semanticwebindia.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
 </div>
+<footer class="page-footer font-small footer_class">
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3 text-white">
+    © 2020 Copyright:
+    <a href="http://www.semanticwebindia.com/"> semanticwebindia.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
