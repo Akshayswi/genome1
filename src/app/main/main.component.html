@@ -1,16 +1,16 @@
-<div style="width: 100%; height: 100%;">
+<div style="width: 100%; height: 100%;" class="font-style">
   <div
     class="container-fluid"
     style="border-top: 2px solid #149ce0; margin-top: 10px;"
   >
     <form [formGroup]="detailsForm" (ngSubmit)="onSubmit()">
-      <div class="row p-2 mt-2">
+      <div class="row mt-2">
         <div
-          class="col-md-2"
+          class="col-md-2 ml-2"
           style="
             border: 0.5px solid #149ce0;
             border-radius: 20px;
-            margin-left: 10px;
+            max-height: 120px;
           "
         >
           <div
@@ -33,21 +33,25 @@
             <mat-radio-button class="example-radio-button" value="Male">
               Male
             </mat-radio-button>
-            <mat-radio-button class="example-radio-button" value="Female">
+            <mat-radio-button
+              class="example-radio-button"
+              value="Female"
+              style="margin-top: -10px;"
+            >
               Female
             </mat-radio-button>
-            <mat-radio-button class="example-radio-button" value="Others">
+            <mat-radio-button
+              class="example-radio-button"
+              value="Others"
+              style="margin-top: -10px;"
+            >
               Others
             </mat-radio-button>
           </mat-radio-group>
         </div>
         <div
-          class="col-md-5"
-          style="
-            border: 0.5px solid #149ce0;
-            border-radius: 20px;
-            margin-left: 10px;
-          "
+          class="col-md-5 ml-2 mr-2"
+          style="border: 0.5px solid #149ce0; border-radius: 20px;"
         >
           <div
             style="
@@ -72,7 +76,7 @@
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field style="width: 30%; margin-left: 10px;">
+            <mat-form-field style="width: 20%; margin-left: 10px;">
               <mat-label>Condition</mat-label>
               <select matInput matNativeControl formControlName="condition1">
                 <option value="equals">Equals</option>
@@ -82,23 +86,21 @@
                 <option value="less than equal">Less than equal</option>
               </select>
             </mat-form-field>
-            <mat-form-field style="width: 10%; margin-left: 10px;">
+            <mat-form-field style="width: 7%; margin-left: 10px;">
               <mat-label>Age</mat-label>
               <input matInput type="number" formControlName="age1" />
             </mat-form-field>
             <mat-radio-group
-              class="radio_small"
               formControlName="condition_radio"
               color="primary"
+              style="margin-left: 25px;"
             >
-              <mat-radio-button class="example-radio-button" value="And">
-                And
-              </mat-radio-button>
-              <mat-radio-button class="example-radio-button" value="Or">
-                Or
-              </mat-radio-button>
+              <mat-radio-button name="and" value="And">And</mat-radio-button>
+              <mat-radio-button name="or" value="Or" style="margin-left: 10px;"
+                >Or</mat-radio-button
+              >
             </mat-radio-group>
-            <mat-form-field style="width: 30%; margin-left: 35px;">
+            <mat-form-field style="width: 20%; margin-left: 35px;">
               <mat-label>Condition</mat-label>
               <select matInput matNativeControl formControlName="condition2">
                 <option value="equals">Equals</option>
@@ -114,15 +116,15 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 ml-md-4">
           <div class="row">
-            <div class="col-7" style="margin-top: 22px;">
+            <div class="col-6" style="margin-top: 20px;">
               <a><strong>Clinical Features / Phenotype</strong></a>
             </div>
-            <div class="col-5">
+            <div class="col-6">
               <div>
                 <mat-form-field style="max-width: 70%;">
-                  <mat-label>Select</mat-label>
+                  <mat-label>Clinical Features</mat-label>
                   <input
                     matInput
                     type="text"
@@ -130,6 +132,49 @@
                   />
                 </mat-form-field>
               </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-5 mt-1">
+              <a><strong>Zygosity</strong></a>
+            </div>
+            <div class="col-6">
+              <mat-form-field
+                style="width: 60%; margin-left: 35px; margin-top: -30px;"
+              >
+                <mat-label>Select</mat-label>
+                <select matInput matNativeControl formControlName="zygosity">
+                  <option value=" "></option>
+                  <option *ngFor="let i of zygositylist" [value]="i.zyg">{{
+                    i["callret-1"]
+                  }}</option>
+                </select>
+              </mat-form-field>
+              <!-- <mat-radio-group formControlName="zygosity" color="primary">
+                <mat-radio-button
+                  name="jk"
+                  [value]="i['zyg']"
+                  *ngFor="let i of zygositylist"
+                  >{{ i["callret-1"] }}</mat-radio-button
+                > -->
+              <!-- <mat-radio-button
+                  name="hetero"
+                  value="hetero"
+                  style="margin-left: 10px;"
+                  >Hetero</mat-radio-button
+                >
+                <br />
+                <mat-radio-button name="hemi" value="hemi"
+                  >Hemi</mat-radio-button
+                >
+                <mat-radio-button
+                  name="nulli"
+                  value="nulli"
+                  style="margin-left: 15px;"
+                  >Nulli</mat-radio-button
+                > -->
+              <!-- </mat-radio-group> -->
             </div>
           </div>
           <div class="row">
@@ -148,27 +193,9 @@
               </mat-radio-group>
             </div>
           </div>
-          <div class="row">
-            <div class="col-6">
-              <a><strong>Zygosity</strong></a>
-            </div>
-            <div class="col-6">
-              <mat-radio-group formControlName="zygosity" color="primary">
-                <mat-radio-button name="homo" value="homo"
-                  >Homo</mat-radio-button
-                >
-                <mat-radio-button
-                  name="hetero"
-                  value="hetero"
-                  style="margin-left: 10px;"
-                  >Hetero</mat-radio-button
-                >
-              </mat-radio-group>
-            </div>
-          </div>
         </div>
       </div>
-      <div class="row p-2 mt-4" style="margin-bottom: 30px;">
+      <div class="row px-2 mt-2 mb-2">
         <div
           class="col-md-10"
           style="border: 0.5px solid#149ce0; border-radius: 20px;"
@@ -189,11 +216,10 @@
               <mat-form-field style="width: 40%; margin-left: 35px;">
                 <mat-label>Select</mat-label>
                 <select matInput matNativeControl formControlName="gene">
-                  <option value="equals">Equals</option>
-                  <option value="greater than">Greater than</option>
-                  <option value="greater than equal">Greater than equal</option>
-                  <option value="less than">Less than</option>
-                  <option value="less than equal">Less than equal</option>
+                  <option value=" "></option>
+                  <option *ngFor="let i of genesymbols" [value]="i.hasgene">{{
+                    i["callret-1"]
+                  }}</option>
                 </select>
               </mat-form-field>
             </div>
@@ -245,12 +271,23 @@
             </div>
           </div>
         </div>
-        <div class="col-md-2" style="text-align: start;">
+        <div
+          class="col-md-2 d-none d-sm-none d-md-block"
+          style="text-align: start;"
+        >
           <button
             style="position: absolute; top: 25%; border-radius: 10px;"
-            class="btn btn-outline-info"
+            class="btn btn-outline-info btn-sm"
             type="submit"
           >
+            Search
+          </button>
+        </div>
+        <div
+          class="col-md-2 d-md-none d-lg-none d-xl-none d-xs-block d-sm-block"
+          style="text-align: center;"
+        >
+          <button class="btn btn-outline-info btn-sm" type="submit">
             Search
           </button>
         </div>
@@ -262,7 +299,7 @@
     style="border-top: 1px solid #149ce0;"
     *ngIf="api_called"
   >
-    <div class="row mt-4">
+    <div class="row mt-2">
       <div class="col-md-8">
         <h2 *ngIf="result_list.length != 0">Matches Found...</h2>
         <h2 *ngIf="result_list.length == 0">
@@ -270,7 +307,10 @@
         </h2>
       </div>
       <div class="col-md-4" style="text-align: center;">
-        <button class="btn btn-outline-info" style="border-radius: 10px;">
+        <button
+          class="btn btn-outline-info btn-sm"
+          style="border-radius: 10px;"
+        >
           Get ANNOVAR Details
         </button>
       </div>
@@ -286,8 +326,43 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let j of value_list">
-            <td *ngFor="let k of j">{{ k }}</td>
+          <tr *ngFor="let j of result_list; let in = index">
+            <td>{{ j.sampleID }}</td>
+            <td>{{ j.sampleType }}</td>
+            <td>{{ j.hasAge }} {{ j.ageUnit }}</td>
+            <td>{{ j.hasSex }}</td>
+            <td
+              style="
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 1px;
+              "
+            >
+              <a
+                [id]="'hello' + in.toString()"
+                data-toggle="popover"
+                data-placement="left"
+                [attr.data-content]="j.hasClinicalFeatures"
+                data-trigger="focus"
+                (mouseover)="over(in.toString())"
+                (mouseout)="out(in.toString())"
+                >{{ j.hasClinicalFeatures }}</a
+              >
+            </td>
+            <td>{{ j.hasConsanguinity }}</td>
+            <td>{{ j.hasAffectedFamilyMembers }}</td>
+            <td>{{ j.hasClinVar }}</td>
+            <td [title]="j.haszygosity.uri">
+              <a [href]="j.haszygosity.uri" target="_blank">{{
+                j.haszygosity.zygosity
+              }}</a>
+            </td>
+            <td [title]="j.hasgene.uri">
+              <a [href]="j.hasgene.uri" target="_blank">{{ j.hasgene.gene }}</a>
+            </td>
+            <td>{{ j.hasIdentifiedVariant }}</td>
+            <td>{{ j.hasVAriantCLassification }}</td>
           </tr>
         </tbody>
       </table>

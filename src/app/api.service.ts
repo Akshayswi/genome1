@@ -16,4 +16,9 @@ export class ApiService {
     var header = new HttpHeaders({ "content-type": "application/json" });
     return this.http.post(url, body, { headers: header });
   }
+
+  get(endpoint) {
+    var url = environment.api_url + endpoint;
+    return this.http.get(url);
+  }
 }

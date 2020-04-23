@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { ApiService } from "../api.service";
+
+declare var $: any;
 @Component({
   selector: "app-main",
   templateUrl: "./main.component.html",
@@ -11,6 +13,8 @@ export class MainComponent implements OnInit {
   result_list = [];
   key_list = [];
   value_list = [];
+  genesymbols = [];
+  zygositylist = [];
   constructor(private apiService: ApiService) {}
   detailsForm = new FormGroup({
     gender: new FormControl(),
@@ -22,12 +26,25 @@ export class MainComponent implements OnInit {
     age2: new FormControl(0),
     clinical_features: new FormControl(""),
     consanguinity: new FormControl(),
-    zygosity: new FormControl(),
-    gene: new FormControl(),
+    zygosity: new FormControl(""),
+    gene: new FormControl(""),
     variantclass: new FormControl(),
     novelty: new FormControl(),
   });
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.apiService.get("viewset/genesymbols/").subscribe((data) => {
+      var a = JSON.stringify(data);
+      var b = JSON.parse(a);
+      this.genesymbols = b;
+      console.log(data);
+    });
+    this.apiService.get("viewset/zygosity/").subscribe((data) => {
+      var a = JSON.stringify(data);
+      var b = JSON.parse(a);
+      this.zygositylist = b;
+      console.log(b);
+    });
+  }
   onSubmit() {
     var age1 = 0;
     var age2 = 0;
@@ -156,15 +173,38 @@ export class MainComponent implements OnInit {
       this.result_list = b;
       this.key_list = [];
       this.value_list = [];
-      Object.keys(this.result_list[0]).forEach((keys) => {
-        this.key_list.push(keys);
-      });
+      this.key_list = [
+        "SampleId",
+        "SampleType",
+        "Age",
+        "Sex",
+        "Clinical Features",
+        "Consanguinity",
+        "Affected Family Members",
+        "Clinvar Details",
+        "Zygosity",
+        "Gene",
+        "Identified Variant",
+        "Variant Classification",
+      ];
+
       for (let item of this.result_list) {
-        var temp_list = [];
-        Object.keys(item).forEach((key) => {
-          temp_list.push(item[key]);
-        });
-        this.value_list.push(temp_list);
+        for (let item1 of this.genesymbols) {
+          if (item["hasgene"] == item1["hasgene"]) {
+            item["hasgene"] = {
+              uri: item1["hasgene"],
+              gene: item1["callret-1"],
+            };
+          }
+        }
+        for (let item2 of this.zygositylist) {
+          if (item["haszygosity"] == item2["zyg"]) {
+            item["haszygosity"] = {
+              uri: item2["zyg"],
+              zygosity: item2["callret-1"],
+            };
+          }
+        }
       }
 
       console.log(this.key_list);
@@ -197,5 +237,13 @@ export class MainComponent implements OnInit {
       novelty,
       "novelty"
     );
+  }
+  over(a) {
+    var id = "#hello" + a;
+    $(id).popover("show");
+  }
+  out(a) {
+    var id = "#hello" + a;
+    $(id).popover("hide");
   }
 }
